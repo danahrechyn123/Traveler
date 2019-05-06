@@ -26,12 +26,20 @@ class CreateTravel extends React.Component {
             cityList: '',
             isFlipped: false,
             dropdownOpen: false,
-            dropdownCityOpen: false
+            dropdownCityOpen: false,
+            dropdownTravelTypeOpen: false,
+            dropdownPlaceTypeOpen: false,
+            dropdownPriceTypeOpen: false,
         };
 
         this.toggle = this.toggle.bind(this);
         this.toggleCity = this.toggleCity.bind(this);
+        this.toggleTravelType = this.toggleTravelType.bind(this);
+        this.togglePriceType = this.togglePriceType.bind(this);
+        this.togglePlaceType = this.togglePlaceType.bind(this);
+
         this.handleChoose = this.handleChoose.bind(this);
+        this.handleChooseCountry = this.handleChooseCountry.bind(this);
 
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -64,20 +72,32 @@ class CreateTravel extends React.Component {
         });
     }
 
+    handleChooseCountry(event) {
+        const { value } = event.target;
+        const { travel } = this.state;
+        this.setState({
+            travel: {
+                ...travel,
+                country: value,
+                city:''
+            }
+        });
+    }
+
     handleClick(e) {
         e.preventDefault();
         this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
     }
 
     handleChoose() {
-        var cities = dataService.getCities(this.state.travel.country).then(res => {
-            this.setState({
-                cityList: res
-            });
-        }).catch(err => console.log(err));
-
+        if (this.state.travel.country !== '') {
+            var cities = dataService.getCities(this.state.travel.country).then(res => {
+                this.setState({
+                    cityList: res
+                });
+            }).catch(err => console.log(err));
+        }
     }
-
 
     handleSubmit(event) {
         event.preventDefault();
@@ -91,11 +111,37 @@ class CreateTravel extends React.Component {
             dropdownOpen: !prevState.dropdownOpen
         }));
     }
+
     toggleCity() {
+        if (this.state.travel.country !== '') {
+            this.setState(prevState => ({
+                dropdownCityOpen: !prevState.dropdownCityOpen
+            }));
+        }
+        else {
+            alert("Choose country before.");
+        }
+    }
+
+    togglePlaceType() {
         this.setState(prevState => ({
-            dropdownCityOpen: !prevState.dropdownCityOpen
+            dropdownPlaceTypeOpen: !prevState.dropdownPlaceTypeOpen
+        }));
+    
+    }
+
+    togglePriceType() {
+        this.setState(prevState => ({
+            dropdownPriceTypeOpen: !prevState.dropdownPriceTypeOpen
         }));
     }
+
+    toggleTravelType() {
+        this.setState(prevState => ({
+            dropdownTravelTypeOpen: !prevState.dropdownTravelTypeOpen
+        }));
+    }
+
 
     render() {
         return (
@@ -105,15 +151,7 @@ class CreateTravel extends React.Component {
                     <Card  key="front" className="front-card">
                         <CardHeader>Create Travel</CardHeader>
                         <CardBody>
-
-                            <div>
-                                <label htmlFor="country">Country</label>
-                                <input type="text" className="form-control"
-                                    name="country"
-                                    value={this.state.travel.country}
-                                    onChange={this.handleChange} />
-                            </div>
-
+                            
                             <InputGroup>
                                 <InputGroupAddon addonType="prepend">
                                     <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
@@ -125,7 +163,7 @@ class CreateTravel extends React.Component {
                                                 <DropdownItem key={c.id}
                                                     name="country"
                                                     value={c.name}
-                                                    onClick={this.handleChange}
+                                                    onClick={this.handleChooseCountry}
                                                 >
                                                     {c.name}
                                                 </DropdownItem>
@@ -138,7 +176,7 @@ class CreateTravel extends React.Component {
 
                             <InputGroup>
                                 <InputGroupAddon addonType="prepend">
-                                    <Dropdown isOpen={this.state.dropdownCityOpen} toggle={this.toggleCity} onClick={this.handleChoose}>
+                                    <Dropdown isOpen={this.state.dropdownCityOpen} toggle={this.toggleCity} onClick={this.handleChoose} >
                                         <DropdownToggle caret className="dropdown-toogle">
                                             City
                                     </DropdownToggle>
@@ -157,6 +195,73 @@ class CreateTravel extends React.Component {
                                 </InputGroupAddon>
                                 <Input value={this.state.travel.city} disabled className="dp-input" />
                             </InputGroup>
+
+                            <InputGroup>
+                                <InputGroupAddon addonType="prepend">
+                                    <Dropdown isOpen={this.state.dropdownPlaceTypeOpen} toggle={this.togglePlaceType}>
+                                        <DropdownToggle caret className="dropdown-toogle">
+                                            Place Type
+                                    </DropdownToggle>
+                                        <DropdownMenu>
+                                            {placeTypeList && placeTypeList.map((c) => (
+                                                <DropdownItem key={c}
+                                                    name="placeType"
+                                                    value={c}
+                                                    onClick={this.handleChange}
+                                                >
+                                                    {c}
+                                                </DropdownItem>
+                                            ))}
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                </InputGroupAddon>
+                                <Input value={this.state.travel.placeType} disabled className="dp-input" />
+                            </InputGroup>
+
+                            <InputGroup>
+                                <InputGroupAddon addonType="prepend">
+                                    <Dropdown isOpen={this.state.dropdownTravelTypeOpen} toggle={this.toggleTravelType}>
+                                        <DropdownToggle caret className="dropdown-toogle">
+                                            Travel Type
+                                    </DropdownToggle>
+                                        <DropdownMenu>
+                                            {travelTypeList && travelTypeList.map((c) => (
+                                                <DropdownItem key={c}
+                                                    name="travelType"
+                                                    value={c}
+                                                    onClick={this.handleChange}
+                                                >
+                                                    {c}
+                                                </DropdownItem>
+                                            ))}
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                </InputGroupAddon>
+                                <Input value={this.state.travel.travelType} disabled className="dp-input" />
+                            </InputGroup>
+
+                            <InputGroup>
+                                <InputGroupAddon addonType="prepend">
+                                    <Dropdown isOpen={this.state.dropdownPriceTypeOpen} toggle={this.togglePriceType}>
+                                        <DropdownToggle caret className="dropdown-toogle">
+                                            Price Type
+                                    </DropdownToggle>
+                                        <DropdownMenu>
+                                            {priceTypeList && priceTypeList.map((c) => (
+                                                <DropdownItem key={c}
+                                                    name="priceType"
+                                                    value={c}
+                                                    onClick={this.handleChange}
+                                                >
+                                                    {c}
+                                                </DropdownItem>
+                                            ))}
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                </InputGroupAddon>
+                                <Input value={this.state.travel.priceType} disabled className="dp-input" />
+                            </InputGroup>
+
 
                         </CardBody>
                         <CardFooter onClick={this.handleSubmit} className="front-footer"> Submit </CardFooter>
@@ -179,3 +284,7 @@ class CreateTravel extends React.Component {
 }
 
 export default CreateTravel;
+
+let travelTypeList = ["Relaxing", "Sport", "Educational", "Bussiness"];
+let priceTypeList = ["Minimum", "Medium", "Expensive", "Luxury"];
+let placeTypeList = ["Restaurant", "Hotel", "Museum", "Monument", "Entertaiment"];
