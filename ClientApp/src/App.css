@@ -1,0 +1,36 @@
+﻿/* main for Layout*/
+.Home {
+    background-color: springgreen;
+    padding-top: 10vh;
+}
+/* main for Layout*/
+.CreateTravel {
+    background-image: url(../src/images/CreateTravelBg.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: blue;
+    padding-top: 12vh;
+}
+.CreatePlace {
+    background-color: blue;
+    padding-top: 9vh;
+    padding-bottom:11vh;
+    min-height:100vh;
+    height:inherit;
+}
+.Places {
+    background-color: brown;
+    padding-top: 10vh;
+}
+
+
+.main {
+    position: absolute;
+    z-index: -2;
+    padding-right: 0;
+    padding-left: 0;
+    left: 0;
+}
+

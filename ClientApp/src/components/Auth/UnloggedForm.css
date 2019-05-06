@@ -1,0 +1,9 @@
+.unlogged-form {
+    margin: auto;
+    margin-top: 50px;
+    width: 20%;
+}
+
+.unlogged-form .buttons {
+    float: right;
+}
