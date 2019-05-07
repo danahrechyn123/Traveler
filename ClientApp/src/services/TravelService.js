@@ -1,16 +1,31 @@
 ﻿import { handleError, handleResponse } from '../helpers';
 
 
+
 export const travelService = {
     addTravel
 };
 
 function addTravel(travel) {
     var travelType = parseTravelType(travel.travelType);
-    var placeType = parsePlaceType(travel.placeType);
-    var priceType = parsePriceType(travel.parsePriceType);
+    var priceType = parsePriceType(travel.priceType);
 
-    console.log(travelType);
+    const tr = {
+        UserId: travel.userId,
+        CityName: travel.city,
+        TravelType: travelType,
+        PriceType: priceType,
+        PeopleAmount: travel.peopleAmount
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tr)
+    };
+
+    return fetch('api/Travel/addtravel', requestOptions);
+    
 }
 
 

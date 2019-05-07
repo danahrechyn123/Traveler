@@ -20,7 +20,9 @@ class CreateTravel extends React.Component {
                 city: '',
                 travelType: '',
                 placeType: '',
-                priceType: ''
+                priceType: '',
+                peopleAmount: '',
+                userId: JSON.parse(localStorage.getItem('user')).id
             },
             countryList: '',
             cityList: '',
@@ -30,13 +32,15 @@ class CreateTravel extends React.Component {
             dropdownTravelTypeOpen: false,
             dropdownPlaceTypeOpen: false,
             dropdownPriceTypeOpen: false,
+            dropdownPeopleAmount:false
         };
 
         this.toggle = this.toggle.bind(this);
         this.toggleCity = this.toggleCity.bind(this);
         this.toggleTravelType = this.toggleTravelType.bind(this);
         this.togglePriceType = this.togglePriceType.bind(this);
-        this.togglePlaceType = this.togglePlaceType.bind(this);
+        this.togglePeopleAmount = this.togglePeopleAmount.bind(this);
+
 
         this.handleChoose = this.handleChoose.bind(this);
         this.handleChooseCountry = this.handleChooseCountry.bind(this);
@@ -123,13 +127,6 @@ class CreateTravel extends React.Component {
         }
     }
 
-    togglePlaceType() {
-        this.setState(prevState => ({
-            dropdownPlaceTypeOpen: !prevState.dropdownPlaceTypeOpen
-        }));
-    
-    }
-
     togglePriceType() {
         this.setState(prevState => ({
             dropdownPriceTypeOpen: !prevState.dropdownPriceTypeOpen
@@ -139,6 +136,12 @@ class CreateTravel extends React.Component {
     toggleTravelType() {
         this.setState(prevState => ({
             dropdownTravelTypeOpen: !prevState.dropdownTravelTypeOpen
+        }));
+    }
+
+    togglePeopleAmount() {
+        this.setState(prevState => ({
+            dropdownPeopleAmount: !prevState.dropdownPeopleAmount
         }));
     }
 
@@ -196,27 +199,6 @@ class CreateTravel extends React.Component {
                                 <Input value={this.state.travel.city} disabled className="dp-input" />
                             </InputGroup>
 
-                            <InputGroup>
-                                <InputGroupAddon addonType="prepend">
-                                    <Dropdown isOpen={this.state.dropdownPlaceTypeOpen} toggle={this.togglePlaceType}>
-                                        <DropdownToggle caret className="dropdown-toogle">
-                                            Place Type
-                                    </DropdownToggle>
-                                        <DropdownMenu>
-                                            {placeTypeList && placeTypeList.map((c) => (
-                                                <DropdownItem key={c}
-                                                    name="placeType"
-                                                    value={c}
-                                                    onClick={this.handleChange}
-                                                >
-                                                    {c}
-                                                </DropdownItem>
-                                            ))}
-                                        </DropdownMenu>
-                                    </Dropdown>
-                                </InputGroupAddon>
-                                <Input value={this.state.travel.placeType} disabled className="dp-input" />
-                            </InputGroup>
 
                             <InputGroup>
                                 <InputGroupAddon addonType="prepend">
@@ -261,6 +243,26 @@ class CreateTravel extends React.Component {
                                 </InputGroupAddon>
                                 <Input value={this.state.travel.priceType} disabled className="dp-input" />
                             </InputGroup>
+
+                            <InputGroup>
+                                <InputGroupAddon addonType="prepend">
+                                    <Dropdown isOpen={this.state.dropdownPeopleAmount} toggle={this.togglePeopleAmount}>
+                                        <DropdownToggle caret className="dropdown-toogle">
+                                            People Amount
+                                    </DropdownToggle>
+                                        <DropdownMenu>
+                                            <DropdownItem name="peopleAmount" value={0} onClick={this.handleChange}>Alone</DropdownItem>
+                                            <DropdownItem name="peopleAmount" value={1} onClick={this.handleChange}> +1 person </DropdownItem>
+                                            <DropdownItem name="peopleAmount" value={2} onClick={this.handleChange}> +2 people </DropdownItem>
+                                            <DropdownItem name="peopleAmount" value={3} onClick={this.handleChange}> +3 people </DropdownItem>
+                                            <DropdownItem name="peopleAmount" value={4} onClick={this.handleChange}> +4 people </DropdownItem>
+                                            <DropdownItem name="peopleAmount" value={5} onClick={this.handleChange}> +5 people </DropdownItem>
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                </InputGroupAddon>
+                                <Input value={this.state.travel.peopleAmount} disabled className="dp-input" />
+                            </InputGroup>
+
 
 
                         </CardBody>
