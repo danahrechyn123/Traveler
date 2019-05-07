@@ -3,7 +3,8 @@
 
 
 export const travelService = {
-    addTravel
+    addTravel,
+    viewTravel
 };
 
 function addTravel(travel) {
@@ -28,6 +29,20 @@ function addTravel(travel) {
     
 }
 
+function viewTravel(travel) {
+    var travelType = parseTravelType(travel.travelType);
+    var priceType = parsePriceType(travel.priceType);
+
+    const tr = {
+        UserId: travel.userId,
+        CityName: travel.city,
+        TravelType: travelType,
+        PriceType: priceType,
+        PeopleAmount: travel.peopleAmount
+    };
+
+    localStorage.setItem('travel', JSON.stringify(tr));
+}
 
 function parseTravelType(typeName) {
     if (typeName === "Relaxing") { return 0; }

@@ -36,7 +36,8 @@ namespace Traveler.Controllers
                 UserId = travelDTO.UserId,
                 CityId = dbcontext.Cities.Where(c => c.Name == travelDTO.CityName).Select(c => c.Id).First(),
                 TravelType = travelDTO.TravelType,
-                PriceType = travelDTO.PriceType
+                PriceType = travelDTO.PriceType,
+                PeopleAmount = travelDTO.PeopleAmount
             };
             dbcontext.Add(travel);
             dbcontext.SaveChanges();

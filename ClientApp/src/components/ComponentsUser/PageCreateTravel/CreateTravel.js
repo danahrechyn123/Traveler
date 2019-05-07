@@ -3,7 +3,7 @@ import './CreateTravel.css';
 import {
     Card, CardHeader, CardFooter, CardBody,
     CardTitle, CardText, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
-    InputGroup, InputGroupAddon, Input
+    InputGroup, InputGroupAddon, Input, Row, Col
 } from 'reactstrap';
 
 import ReactCardFlip from 'react-card-flip';
@@ -43,11 +43,11 @@ class CreateTravel extends React.Component {
 
 
         this.handleChoose = this.handleChoose.bind(this);
-        this.handleChooseCountry = this.handleChooseCountry.bind(this);
-
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSaveTravel = this.handleSaveTravel.bind(this);
+        this.handleViewTravel = this.handleViewTravel.bind(this);
+        this.handleChooseCountry = this.handleChooseCountry.bind(this);
     }
 
     componentWillMount() {
@@ -90,6 +90,16 @@ class CreateTravel extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
+        this.setState({
+            travel: {
+                country: '',
+                city: '',
+                travelType: '',
+                placeType: '',
+                priceType: '',
+                peopleAmount: ''
+            }
+        });
         this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
     }
 
@@ -103,10 +113,26 @@ class CreateTravel extends React.Component {
         }
     }
 
-    handleSubmit(event) {
+    handleSaveTravel(event) {
         event.preventDefault();
         this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
         travelService.addTravel(this.state.travel);
+        this.setState({
+            travel: {
+                country: '',
+                city: '',
+                travelType: '',
+                placeType: '',
+                priceType: '',
+                peopleAmount: ''
+            }
+        });
+    }
+
+    handleViewTravel(event) {
+        event.preventDefault();
+        this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+        travelService.viewTravel(this.state.travel);
     }
 
 
@@ -263,10 +289,8 @@ class CreateTravel extends React.Component {
                                 <Input value={this.state.travel.peopleAmount} disabled className="dp-input" />
                             </InputGroup>
 
-
-
                         </CardBody>
-                        <CardFooter onClick={this.handleSubmit} className="front-footer"> Submit </CardFooter>
+                        <CardFooter onClick={this.handleViewTravel} className="front-footer"> Submit </CardFooter>
                     </Card>
 
                     <Card key="back" className="back-card">
@@ -276,7 +300,10 @@ class CreateTravel extends React.Component {
                             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
 
                         </CardBody>
-                        <CardFooter onClick={this.handleClick} className="back-footer"> Back </CardFooter>
+                        <CardFooter className="back-footer" >                            
+                                <p onClick={this.handleSaveTravel} className="back-footer-btn">Save travel</p>
+                                <p onClick={this.handleClick} className="back-footer-btn last">Go Back</p>                            
+                        </CardFooter>
                     </Card>
               
                 </ReactCardFlip>
