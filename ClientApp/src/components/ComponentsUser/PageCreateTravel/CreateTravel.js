@@ -273,9 +273,13 @@ class CreateTravel extends React.Component {
                         <CardBody>
                            
                             {this.state.placeList && this.state.placeList.map((place) => (
-                                <Card key={place.id}>
-                                    <CardHeader>{parsePlaceType( place.placeType )}</CardHeader>
-                                    <CardBody>{place.name}</CardBody>
+                                <Card key={place.id} className="place-card"> 
+                                    <CardHeader className="place-card-header">{parsePlaceType(place.placeType)}</CardHeader>
+                                    <CardBody>
+                                        <img src={place.imgUrl}
+                                            width="187px" />
+                                        <br/>
+                                        {place.name}</CardBody>
                                     <CardFooter> Like</CardFooter>
                                 </Card>
                             ))}
