@@ -93,6 +93,16 @@ namespace Traveler.Controllers
             
         }
 
+        [HttpPost("getPlaces")]
+        public IEnumerable<PlaceToVisit> GetPlacesForTravel([FromBody]TravelDTO travel)
+        {
+            var CityId = _context.Cities.Where(c => c.Name == travel.CityName).Select(c => c.Id).First();
+            var places = _context.Places.Where(p => p.CityId == CityId)
+                                        .Where(P => P.PriceType == travel.PriceType)
+                                        .ToArray();
+            return places;
+        }
+
         // DELETE: api/PlaceToVisits/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<PlaceToVisit>> DeletePlaceToVisit(int id)

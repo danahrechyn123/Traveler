@@ -24,6 +24,7 @@ class CreateTravel extends React.Component {
             },
             countryList: '',
             cityList: '',
+            placeList: '',
             isFlipped: false,
             dropdownOpen: false,
             dropdownCityOpen: false,
@@ -58,8 +59,7 @@ class CreateTravel extends React.Component {
             });
         }).catch(err => console.log(err));
     }
-
-    
+  
     handleChange(event) {
         const { name, value } = event.target;
         const { travel } = this.state;
@@ -126,7 +126,11 @@ class CreateTravel extends React.Component {
     handleViewTravel(event) {
         event.preventDefault();
         this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-        travelService.viewTravel(this.state.travel);
+        travelService.getPlaces(this.state.travel).then(res => {
+            this.setState({
+                placeList: res
+            });
+        }).catch(err => console.log(err));
     }
 
 
@@ -267,9 +271,14 @@ class CreateTravel extends React.Component {
                     <Card key="back" className="back-card">
                         <CardHeader>Result</CardHeader>
                         <CardBody>
-                            <CardTitle>Special Title Treatment</CardTitle>
-                            <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-
+                           
+                            {this.state.placeList && this.state.placeList.map((place) => (
+                                <Card key={place.id}>
+                                    <CardHeader>{parsePlaceType( place.placeType )}</CardHeader>
+                                    <CardBody>{place.name}</CardBody>
+                                    <CardFooter> Like</CardFooter>
+                                </Card>
+                            ))}
                         </CardBody>
                         <CardFooter className="back-footer" >                            
                                 <p onClick={this.handleSaveTravel} className="back-footer-btn">Save travel</p>
@@ -286,3 +295,12 @@ class CreateTravel extends React.Component {
 export default CreateTravel;
 
 let priceTypeList = ["Minimum", "Medium", "Expensive", "Luxury"];
+
+function parsePlaceType(id) {
+    if (id === 0) { return "Restaurant"; }
+    else if (id === 1) { return "Hotel"; }
+    else if (id === 2) { return "Museum"; }
+    else if (id === 3) { return "Monument"; }
+    else if (id === 4) { return "Entertaiment"; }
+    else { return "error" }
+}

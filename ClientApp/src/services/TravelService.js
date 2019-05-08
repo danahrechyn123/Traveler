@@ -4,7 +4,7 @@
 
 export const travelService = {
     addTravel,
-    viewTravel
+    getPlaces
 };
 
 function addTravel(travel) {
@@ -27,17 +27,27 @@ function addTravel(travel) {
     
 }
 
-function viewTravel(travel) {
+function getPlaces(travel) {
     var priceType = parsePriceType(travel.priceType);
 
     const tr = {
-        UserId: travel.userId,
         CityName: travel.city,
-        PriceType: priceType,
-        PeopleAmount: travel.peopleAmount
+        PriceType: priceType
     };
 
-    localStorage.setItem('travel', JSON.stringify(tr));
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tr)
+    };
+    var countries;
+    return fetch('/api/PlaceToVisits/getPlaces', requestOptions)
+        .then(handleResponse, handleError)
+        .then(res => {
+            console.log(res);
+            return res;
+        })
+        .catch();    
 }
 
 
