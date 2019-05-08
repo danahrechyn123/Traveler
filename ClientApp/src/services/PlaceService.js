@@ -10,14 +10,12 @@ export const placeService = {
 };
 
 function suggestPlace(place) {
-    var travelType = parseTravelType(place.travelType);
     var priceType = parsePriceType(place.priceType);
     var placeType = parsePlaceType(place.placeType);
 
     var pl = {
         UserId: place.userId,
         CityName: place.city,
-        TravelType: travelType,
         PriceType: priceType,
         PlaceType: placeType,
         ImgUrl: place.imgUrl,

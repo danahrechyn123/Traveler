@@ -15,7 +15,6 @@ class PlaceFormComp extends React.Component {
             data: {
                 country: '',
                 city: '',
-                travelType: '',
                 placeType: '',
                 priceType: '',
                 imgUrl: '',
@@ -28,14 +27,12 @@ class PlaceFormComp extends React.Component {
             isFlipped: false,
             dropdownOpen: false,
             dropdownCityOpen: false,
-            dropdownTravelTypeOpen: false,
             dropdownPriceTypeOpen: false,
             dropdownPlaceTypeOpen: false
         };
 
         this.toggle = this.toggle.bind(this);
         this.toggleCity = this.toggleCity.bind(this);
-        this.toggleTravelType = this.toggleTravelType.bind(this);
         this.togglePriceType = this.togglePriceType.bind(this);
         this.togglePlaceType = this.togglePlaceType.bind(this);
 
@@ -106,6 +103,18 @@ class PlaceFormComp extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         placeService.suggestPlace(this.state.data);
+        this.setState({
+            data: {
+                country: '',
+                city: '',
+                placeType: '',
+                priceType: '',
+                imgUrl: '',
+                name: '',
+                about: ''
+            }
+        });
+        alert("Thank you for this amazing place!");
     }
 
     toggle() {
@@ -131,12 +140,7 @@ class PlaceFormComp extends React.Component {
         }));
     }
 
-    toggleTravelType() {
-        this.setState(prevState => ({
-            dropdownTravelTypeOpen: !prevState.dropdownTravelTypeOpen
-        }));
-    }
-
+  
     togglePlaceType() {
         this.setState(prevState => ({
             dropdownPlaceTypeOpen: !prevState.dropdownPlaceTypeOpen
@@ -171,7 +175,7 @@ class PlaceFormComp extends React.Component {
                         />
                         <br />
                         <img src={this.state.data.imgUrl}
-                            width="390" height="300" />
+                            width="400" height="320" />
 
                         <br />
                         <br />
@@ -217,29 +221,6 @@ class PlaceFormComp extends React.Component {
                                     </Dropdown>
                                 </InputGroupAddon>
                             <Input value={this.state.data.city} disabled className="dp-input" />
-                            </InputGroup>
-
-
-                            <InputGroup>
-                                <InputGroupAddon addonType="prepend">
-                                    <Dropdown isOpen={this.state.dropdownTravelTypeOpen} toggle={this.toggleTravelType}>
-                                        <DropdownToggle caret className="dropdown-toogle">
-                                            Travel Type
-                                    </DropdownToggle>
-                                        <DropdownMenu>
-                                            {travelTypeList && travelTypeList.map((c) => (
-                                                <DropdownItem key={c}
-                                                    name="travelType"
-                                                    value={c}
-                                                    onClick={this.handleChange}
-                                                >
-                                                    {c}
-                                                </DropdownItem>
-                                            ))}
-                                        </DropdownMenu>
-                                    </Dropdown>
-                                </InputGroupAddon>
-                            <Input value={this.state.data.travelType} disabled className="dp-input" />
                             </InputGroup>
 
                             <InputGroup>

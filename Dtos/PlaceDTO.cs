@@ -9,7 +9,6 @@ namespace Traveler.Dtos
     public class PlaceDTO
     {
         public string CityName { get; set; }
-        public TravelType TravelType { get; set; }
         public PlaceType PlaceType { get; set; }
         public PriceType PriceType { get; set; }
         public string ImgUrl { get; set; }

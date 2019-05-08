@@ -85,7 +85,6 @@ namespace Traveler.Controllers
                 Name = placeToVisit.Name,
                 About = placeToVisit.About,
                 ImgUrl = placeToVisit.ImgUrl,
-                TravelType = placeToVisit.TravelType,
                 PlaceType = placeToVisit.PlaceType,
                 PriceType = placeToVisit.PriceType
             };

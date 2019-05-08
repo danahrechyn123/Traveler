@@ -6,6 +6,6 @@
         Hotel = 1,
         Museum = 2,
         Monument = 3,
-        Park = 4
+        Entertaiment = 4
     }
 }
