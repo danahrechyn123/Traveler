@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Traveler.Entities;
 
 namespace Traveler.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190508073711_DropTravelTypeFromPlace")]
+    partial class DropTravelTypeFromPlace
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,6 +97,8 @@ namespace Traveler.Migrations
                     b.Property<int>("PeopleAmount");
 
                     b.Property<int>("PriceType");
+
+                    b.Property<int>("TravelType");
 
                     b.Property<int>("UserId");
 

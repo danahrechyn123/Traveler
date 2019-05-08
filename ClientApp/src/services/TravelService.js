@@ -8,13 +8,11 @@ export const travelService = {
 };
 
 function addTravel(travel) {
-    var travelType = parseTravelType(travel.travelType);
     var priceType = parsePriceType(travel.priceType);
 
     const tr = {
         UserId: travel.userId,
         CityName: travel.city,
-        TravelType: travelType,
         PriceType: priceType,
         PeopleAmount: travel.peopleAmount
     };
@@ -30,13 +28,11 @@ function addTravel(travel) {
 }
 
 function viewTravel(travel) {
-    var travelType = parseTravelType(travel.travelType);
     var priceType = parsePriceType(travel.priceType);
 
     const tr = {
         UserId: travel.userId,
         CityName: travel.city,
-        TravelType: travelType,
         PriceType: priceType,
         PeopleAmount: travel.peopleAmount
     };
@@ -44,12 +40,7 @@ function viewTravel(travel) {
     localStorage.setItem('travel', JSON.stringify(tr));
 }
 
-export function parseTravelType(typeName) {
-    if (typeName === "Relaxing") { return 0; }
-    else if (typeName === "Sport") { return 1; }
-    else if (typeName === "Educational") { return 2; }
-    else if (typeName === "Bussiness") { return 3; }
-}
+
 export function parsePlaceType(typeName) {
     if (typeName === "Restaurant") { return 0; }
     else if (typeName === "Hotel") { return 1; }

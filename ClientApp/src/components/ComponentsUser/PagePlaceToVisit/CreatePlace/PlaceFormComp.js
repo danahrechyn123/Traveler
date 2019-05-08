@@ -111,7 +111,8 @@ class PlaceFormComp extends React.Component {
                 priceType: '',
                 imgUrl: '',
                 name: '',
-                about: ''
+                about: '',
+                userId: JSON.parse(localStorage.getItem('user')).id
             }
         });
         alert("Thank you for this amazing place!");

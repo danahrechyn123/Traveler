@@ -1,4 +1,4 @@
-﻿import { parseTravelType, parsePriceType, parsePlaceType } from './TravelService';
+﻿import { parsePriceType, parsePlaceType } from './TravelService';
 
 export const placeService = {
     suggestPlace,

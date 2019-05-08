@@ -16,9 +16,7 @@ namespace Traveler.Entities
         
         public DateTime DateFrom { get; set; }        
         public DateTime DateTill { get; set; }
-
-        public TravelType TravelType { get; set; }
-
+        
         public PriceType PriceType { get; set; }
 
         public int PeopleAmount { get; set; }

@@ -20,8 +20,7 @@ namespace Traveler.Entities
         public virtual City City { get; set; }
 
         public string Name { get; set; }             
-
-        public TravelType TravelType { get; set; }
+        
 
         public PriceType PriceType { get; set; }
 
