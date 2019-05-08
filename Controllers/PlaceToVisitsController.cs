@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Traveler.Dtos;
 using Traveler.Entities;
 
 namespace Traveler.Controllers
@@ -73,13 +74,22 @@ namespace Traveler.Controllers
             return NoContent();
         }
 
-        // POST: api/PlaceToVisits
-        [HttpPost]
-        public void PostPlaceToVisit([FromBody]PlaceToVisit  placeToVisit)
+
+        [HttpPost("suggestPlace")]
+        public void PostPlaceToVisit([FromBody]PlaceDTO  placeToVisit)
         {
-            placeToVisit.City = _context.Cities.Where(c => c.Id == placeToVisit.CityId).First();
-            placeToVisit.User = _context.Users.Where(u => u.Id == placeToVisit.UserId).First();
-            _context.Places.Add(placeToVisit);
+            PlaceToVisit place = new PlaceToVisit
+            {
+                CityId = _context.Cities.Where(c => c.Name == placeToVisit.CityName).Select(c => c.Id).First(),
+                UserId = _context.Users.Where(u => u.Id == placeToVisit.UserId).Select(u => u.Id).First(),
+                Name = placeToVisit.Name,
+                About = placeToVisit.About,
+                ImgUrl = placeToVisit.ImgUrl,
+                TravelType = placeToVisit.TravelType,
+                PlaceType = placeToVisit.PlaceType,
+                PriceType = placeToVisit.PriceType
+            };
+            _context.Places.Add(place);
             _context.SaveChanges();
             
         }

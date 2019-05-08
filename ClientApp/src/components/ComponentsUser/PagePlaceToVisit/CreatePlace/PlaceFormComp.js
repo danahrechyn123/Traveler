@@ -1,13 +1,10 @@
 ﻿import React from 'react';
-import { connect } from 'react-redux';
 import {
     Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
     InputGroup, InputGroupText, InputGroupAddon, Input, Button, ButtonGroup
 } from 'reactstrap';
 import '../Places.css';
 import { dataService } from '../../../../services/DataService';
-
-import { travelService } from '../../../../services/TravelService';
 import { placeService } from '../../../../services/PlaceService';
 
 class PlaceFormComp extends React.Component {
@@ -43,6 +40,7 @@ class PlaceFormComp extends React.Component {
         this.togglePlaceType = this.togglePlaceType.bind(this);
 
         this.handleChoose = this.handleChoose.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleChooseCountry = this.handleChooseCountry.bind(this);
@@ -105,7 +103,10 @@ class PlaceFormComp extends React.Component {
         }
     }
 
-   
+    handleSubmit(event) {
+        event.preventDefault();
+        placeService.suggestPlace(this.state.data);
+    }
 
     toggle() {
         this.setState(prevState => ({
@@ -263,7 +264,7 @@ class PlaceFormComp extends React.Component {
                             <Input value={this.state.data.priceType} disabled className="dp-input" />
                             </InputGroup>
 
-                        <InputGroup>
+                            <InputGroup>
                             <InputGroupAddon addonType="prepend">
                                 <Dropdown isOpen={this.state.dropdownPlaceTypeOpen} toggle={this.togglePlaceType}>
                                     <DropdownToggle caret className="dropdown-toogle">
@@ -285,7 +286,7 @@ class PlaceFormComp extends React.Component {
                             <Input value={this.state.data.placeType} disabled className="dp-input" />
                         </InputGroup>
 
-
+                        <Input type="submit" value="Suggest Place"/>
 
                     </form>
                 </div>
