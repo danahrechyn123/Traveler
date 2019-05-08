@@ -53,26 +53,30 @@
 .front-footer:hover {
     background-color: rgb(255, 255, 255, 9);
 }
-
+.back-card-body{
+    overflow-y:scroll;
+}
 /*place card*/
 .place-card {
-    max-height: auto;
     max-width: 190px;
     color: black;
     border: solid 1px white;
     border-radius: 30px;
-    background-color: rgb(255, 255, 255, 0.5);
-    padding:0;
+    background-color: rgb(255, 255, 255, 0.7);
+    padding: 0;
 }
-.place-card .card-body{
-    padding:0;
+.place-card-info {
+    max-height: 120px;
+    overflow-y: scroll;
+}
+.place-card .card-body {
+    padding: 0;
 }
 .place-header:first-child {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
 }
 .place-card-header {
-    background-color: rgb(255, 255, 255, 0.7);
     text-align: center;
     color: black;
     border-radius: 30px;
