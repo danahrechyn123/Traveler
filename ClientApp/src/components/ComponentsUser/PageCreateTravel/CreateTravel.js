@@ -3,7 +3,7 @@ import './CreateTravel.css';
 import {
     Card, CardHeader, CardFooter, CardBody,
     CardTitle, CardText, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
-    InputGroup, InputGroupAddon, Input, Row, Col
+    InputGroup, InputGroupAddon, Input, Row, Col, CardDeck
 } from 'reactstrap';
 
 import ReactCardFlip from 'react-card-flip';
@@ -270,19 +270,24 @@ class CreateTravel extends React.Component {
 
                     <Card key="back" className="back-card">
                         <CardHeader>Result</CardHeader>
-                        <CardBody>
-                           
+                        <CardBody className="back-card-body">
+                            <CardDeck>
                             {this.state.placeList && this.state.placeList.map((place) => (
                                 <Card key={place.id} className="place-card"> 
                                     <CardHeader className="place-card-header">{parsePlaceType(place.placeType)}</CardHeader>
                                     <CardBody>
                                         <img src={place.imgUrl}
                                             width="187px" />
-                                        <br/>
-                                        {place.name}</CardBody>
-                                    <CardFooter> Like</CardFooter>
+                                            <br />
+                                            <div className="place-card-info">
+                                                Name: {place.name}
+                                                About: {place.about}
+                                            </div>
+                                    </CardBody>
+                                    <CardFooter> {place.like} Likes</CardFooter>
                                 </Card>
-                            ))}
+                                ))}
+                            </CardDeck>
                         </CardBody>
                         <CardFooter className="back-footer" >                            
                                 <p onClick={this.handleSaveTravel} className="back-footer-btn">Save travel</p>
