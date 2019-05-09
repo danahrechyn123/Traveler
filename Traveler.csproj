@@ -31,7 +31,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\components\ComponentsAdmin\" />
-    <Folder Include="ClientApp\src\components\ComponentsUser\PagePersonal\" />
     <Folder Include="ClientApp\src\components\ComponentsUser\PageTravels\" />
     <Folder Include="ClientApp\src\images\" />
   </ItemGroup>

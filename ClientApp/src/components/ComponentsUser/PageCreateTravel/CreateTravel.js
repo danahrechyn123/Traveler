@@ -9,6 +9,7 @@ import {
 import ReactCardFlip from 'react-card-flip';
 import { travelService } from '../../../services/TravelService';
 import { dataService } from '../../../services/DataService';
+import  PlaceCard  from './PlaceCard';
 
 class CreateTravel extends React.Component {
 
@@ -29,18 +30,15 @@ class CreateTravel extends React.Component {
             dropdownOpen: false,
             dropdownCityOpen: false,
             dropdownPriceTypeOpen: false,
-            dropdownPeopleAmount:false
+            dropdownPeopleAmount: false,
+            isLiked:false
         };
+        
 
-        this.toggle = this.toggle.bind(this);
-        this.toggleCity = this.toggleCity.bind(this);
-        this.togglePriceType = this.togglePriceType.bind(this);
-        this.togglePeopleAmount = this.togglePeopleAmount.bind(this);
-
-
+        this.handleClick = this.handleClick.bind(this);
         this.handleChoose = this.handleChoose.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleAddPlace = this.handleAddPlace.bind(this);
         this.handleSaveTravel = this.handleSaveTravel.bind(this);
         this.handleViewTravel = this.handleViewTravel.bind(this);
         this.handleChooseCountry = this.handleChooseCountry.bind(this);
@@ -92,8 +90,11 @@ class CreateTravel extends React.Component {
                 travelType: '',
                 placeType: '',
                 priceType: '',
-                peopleAmount: ''
-            }
+                peopleAmount: '',
+                userId: JSON.parse(localStorage.getItem('user')).id
+            },
+            placeList: ''
+
         });
         this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
     }
@@ -119,28 +120,32 @@ class CreateTravel extends React.Component {
                 priceType: '',
                 peopleAmount: '',
                 userId: JSON.parse(localStorage.getItem('user')).id
-            }
+            },
+            placeList: ''
         });
     }
 
     handleViewTravel(event) {
         event.preventDefault();
         this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-        travelService.getPlaces(this.state.travel).then(res => {
+        travelService.getPlacesStrData(this.state.travel).then(res => {
             this.setState({
                 placeList: res
             });
         }).catch(err => console.log(err));
     }
 
+    handleAddPlace(event) {
+        
+    }
 
-    toggle() {
+    toggle = () => {
         this.setState(prevState => ({
             dropdownOpen: !prevState.dropdownOpen
         }));
     }
 
-    toggleCity() {
+    toggleCity = () => {
         if (this.state.travel.country !== '') {
             this.setState(prevState => ({
                 dropdownCityOpen: !prevState.dropdownCityOpen
@@ -151,32 +156,40 @@ class CreateTravel extends React.Component {
         }
     }
 
-    togglePriceType() {
+    toggleLike = () => {
+        this.setState(prevState => ({
+            isLiked: !prevState.isLiked
+        }));
+    }
+
+    togglePriceType = () => {
         this.setState(prevState => ({
             dropdownPriceTypeOpen: !prevState.dropdownPriceTypeOpen
         }));
     }
 
-    toggleTravelType() {
+    toggleTravelType = () => {
         this.setState(prevState => ({
             dropdownTravelTypeOpen: !prevState.dropdownTravelTypeOpen
         }));
     }
 
-    togglePeopleAmount() {
+    togglePeopleAmount = () => {
         this.setState(prevState => ({
             dropdownPeopleAmount: !prevState.dropdownPeopleAmount
         }));
     }
 
 
+
     render() {
+
         return (
             <div className="CreateTravel container-fluid">
                 <ReactCardFlip isFlipped={this.state.isFlipped} flipSpeedFrontToBack="1.3" flipSpeedBackToFront="1.3">
                     
-                    <Card  key="front" className="front-card">
-                        <CardHeader>Create Travel</CardHeader>
+                    <Card key="front" className="front-card">
+                        <CardHeader>Create Travel </CardHeader>
                         <CardBody>
                             
                             <InputGroup>
@@ -272,20 +285,13 @@ class CreateTravel extends React.Component {
                         <CardHeader>Result</CardHeader>
                         <CardBody className="back-card-body">
                             <CardDeck>
-                            {this.state.placeList && this.state.placeList.map((place) => (
-                                <Card key={place.id} className="place-card"> 
-                                    <CardHeader className="place-card-header">{parsePlaceType(place.placeType)}</CardHeader>
-                                    <CardBody>
-                                        <img src={place.imgUrl}
-                                            width="187px" />
-                                            <br />
-                                            <div className="place-card-info">
-                                                Name: {place.name}
-                                                About: {place.about}
-                                            </div>
-                                    </CardBody>
-                                    <CardFooter> {place.like} Likes</CardFooter>
-                                </Card>
+                                {this.state.placeList && this.state.placeList.map((place) => (
+                                    <PlaceCard
+                                        id={place.id}
+                                        name={place.name}
+                                        placeType={place.placeType}
+                                        imgUrl={place.imgUrl}
+                                        about={place.about} />
                                 ))}
                             </CardDeck>
                         </CardBody>
@@ -302,6 +308,8 @@ class CreateTravel extends React.Component {
 }
 
 export default CreateTravel;
+
+
 
 let priceTypeList = ["Minimum", "Medium", "Expensive", "Luxury"];
 

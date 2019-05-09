@@ -10,7 +10,6 @@ import simpleParallax from 'simple-parallax-js';
 class Places extends React.Component {
    
     render() {
-        const currentUser = JSON.parse(localStorage.getItem('user'));
         return (
             <div className="Places container-fluid">
                 <div className = "AddPlaceBtn">

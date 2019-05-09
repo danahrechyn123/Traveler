@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import { Login } from './components/Auth/Login';
 import { Register } from './components/Auth/Register';
 import CreateTravel from './components/ComponentsUser/PageCreateTravel/CreateTravel';
+import PersonalPage from './components/ComponentsUser/PagePersonal/PersonalPage';
 import Places from './components/ComponentsUser/PagePlaceToVisit/Places';
 import CreatePlace from './components/ComponentsUser/PagePlaceToVisit/CreatePlace/CreatePlace';
 import { withRouter } from 'react-router';
@@ -21,6 +22,7 @@ class App extends React.Component {
               <Route path="/createtravel" component={CreateTravel} />
               <Route path="/createplace" component={CreatePlace} />
               <Route path="/mustvisit" component={Places} />
+              <Route path="/personalpage" component={PersonalPage} />
           </Layout>  
     );
   }

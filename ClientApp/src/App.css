@@ -13,12 +13,21 @@
     background-color: blue;
     padding-top: 12vh;
 }
+.PersonalPage {
+    background-image: url(../src/images/PersonaPageBg2.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: blue;
+    padding-top: 12vh;
+}
 .CreatePlace {
     background-color: blue;
     padding-top: 9vh;
-    padding-bottom:11vh;
-    min-height:100vh;
-    height:inherit;
+    padding-bottom: 11vh;
+    min-height: 100vh;
+    height: inherit;
 }
 .Places {
     background-color: brown;

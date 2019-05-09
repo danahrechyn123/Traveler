@@ -4,7 +4,9 @@
 
 export const travelService = {
     addTravel,
-    getPlaces
+    getPlacesStrData,
+    getPlacesIdData,
+    getTravelForUser
 };
 
 function addTravel(travel) {
@@ -27,7 +29,7 @@ function addTravel(travel) {
     
 }
 
-function getPlaces(travel) {
+function getPlacesStrData(travel) {
     var priceType = parsePriceType(travel.priceType);
 
     const tr = {
@@ -50,6 +52,41 @@ function getPlaces(travel) {
         .catch();    
 }
 
+function getPlacesIdData(travel) {
+
+    const tr = {
+        CityId: travel.city,
+        PriceType: travel.priceType
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tr)
+    };
+    return fetch('/api/PlaceToVisits/getPlacesIdData', requestOptions)
+        .then(handleResponse, handleError)
+        .then(res => {
+            console.log(res);
+            return res;
+        })
+        .catch();
+}
+
+function getTravelForUser(userId) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userId)
+    };
+
+    return fetch('/api/Travel/getusertravels', requestOptions)
+        .then(handleResponse, handleError)
+        .then(res => {
+            return res;
+        })
+        .catch();    
+}
 
 export function parsePlaceType(typeName) {
     if (typeName === "Restaurant") { return 0; }

@@ -42,23 +42,33 @@ namespace Traveler.Controllers
             dbcontext.SaveChanges();
         }
 
-
-        // POST: api/Travel
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("getusertravels")]
+        public IEnumerable<TravelViewDTO> GetTravelsForUser([FromBody]int userId)
         {
+            var travels = dbcontext.Travels.Where(t => t.UserId == userId).ToArray();
+
+            List<TravelViewDTO> travelsView = new List<TravelViewDTO>();
+            foreach(var tr in travels)
+            {
+                var countryId = dbcontext.Cities.Where(c => c.Id == tr.CityId).Select(c => c.CountryId).First();
+                tr.City = dbcontext.Cities.Where(c => c.Id == tr.CityId).First();
+                tr.User = dbcontext.Users.Where(c => c.Id == tr.UserId).First();
+                TravelViewDTO travelView = new TravelViewDTO
+                {
+                    Id = tr.Id,
+                    OwnerName = tr.User.Username,
+                    CityName = tr.City.Name,
+                    CityId = tr.CityId,
+                    CountryName = dbcontext.Countries.Where(c => c.Id == countryId).Select(c => c.Name).First(),
+                    PriceType = tr.PriceType,
+                    Date = tr.DateFrom.ToLongDateString(),
+                    RegistedAmount = 0
+                };
+                travelsView.Add(travelView);
+            }
+
+            return travelsView;
         }
 
-        // PUT: api/Travel/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

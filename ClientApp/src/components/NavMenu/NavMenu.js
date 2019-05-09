@@ -14,7 +14,7 @@ class NavMenu extends React.Component {
                         <h2><Link className="btn btn-outline-primary" to={'/travellist'}>Travels</Link></h2>
                         <h2><Link className="btn btn-outline-primary" to={'/mustvisit'}>Must Visit</Link></h2>
                         <h2><Link className="btn btn-outline-primary" to={'/createtravel'}>Create</Link></h2>
-                        <h2><Link className="btn btn-outline-primary" to={'/personalcabinet'}>{currentUser.firstName} {currentUser.lastName}</Link></h2>
+                        <h2><Link className="btn btn-outline-primary" to={'/personalpage'}>{currentUser.firstName} {currentUser.lastName}</Link></h2>
 
                         <h2><Link className="btn btn-outline-primary" to={'/login'} exact>Logout</Link></h2>
                     </div>

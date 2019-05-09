@@ -9,13 +9,17 @@
     box-shadow: 12px .95rem .95rem rgba(0, 0, 0, .45);
 }
 @font-face {
-    font-family: GreatVibes-Regular;
-    src: url(../../fonts/GreatVibes-Regular.ttf);
+    font-family: Raleway-Medium;
+    src: url(../../fonts/Raleway/Raleway-Medium.ttf);
+}
+@font-face {
+    font-family: Raleway-Light;
+    src: url(../../fonts/Raleway/Raleway-Light.ttf);
 }
 
-h2{
-    font-family:GreatVibes-Regular;
- }
+h2 {
+    font-family: Raleway-Light;
+}
 .btn {
     margin-top:5px;
     margin-left:10px;
