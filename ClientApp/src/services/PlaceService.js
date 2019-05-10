@@ -20,7 +20,8 @@ function suggestPlace(place) {
         PlaceType: placeType,
         ImgUrl: place.imgUrl,
         About: place.about,
-        Name: place.name
+        Name: place.name,
+        Price: place.price
     };
     const requestOptions = {
         method: 'POST',

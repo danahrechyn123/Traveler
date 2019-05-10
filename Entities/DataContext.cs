@@ -12,6 +12,7 @@ namespace Traveler.Entities
         public DbSet<City> Cities { get; set; }
         public DbSet<PlaceToVisit> Places { get; set; }
         public DbSet<Travel> Travels { get; set; }
+        public DbSet<SavedPlaces> SavedPlaces { get; set; }
 
     }
 }

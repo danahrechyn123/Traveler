@@ -31,5 +31,11 @@ namespace Traveler.Entities
         public int Like { get; set; }
         public string About { get; set; }
 
+        public int Price { get; set; }
+
+        public int Status { get; set; }
+
+        public DateTime Date { get; set; }
+
     }
 }

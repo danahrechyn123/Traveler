@@ -86,7 +86,10 @@ namespace Traveler.Controllers
                 About = placeToVisit.About,
                 ImgUrl = placeToVisit.ImgUrl,
                 PlaceType = placeToVisit.PlaceType,
-                PriceType = placeToVisit.PriceType
+                PriceType = placeToVisit.PriceType,
+                Price = placeToVisit.Price,
+                Status = 0,
+                Date = DateTime.UtcNow
             };
             _context.Places.Add(place);
             _context.SaveChanges();

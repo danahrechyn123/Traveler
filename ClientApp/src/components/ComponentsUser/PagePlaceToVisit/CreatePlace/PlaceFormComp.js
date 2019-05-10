@@ -19,7 +19,8 @@ class PlaceFormComp extends React.Component {
                 priceType: '',
                 imgUrl: '',
                 name: '',
-                about:'',
+                about: '',
+                price:'',
                 userId: JSON.parse(localStorage.getItem('user')).id
             },
             countryList: '',
@@ -29,6 +30,7 @@ class PlaceFormComp extends React.Component {
             dropdownCityOpen: false,
             dropdownPriceTypeOpen: false,
             dropdownPlaceTypeOpen: false
+           
         };
 
         this.toggle = this.toggle.bind(this);
@@ -39,7 +41,6 @@ class PlaceFormComp extends React.Component {
         this.handleChoose = this.handleChoose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
         this.handleChooseCountry = this.handleChooseCountry.bind(this);
     }
 
@@ -75,20 +76,7 @@ class PlaceFormComp extends React.Component {
         });
     }
 
-    handleClick(e) {
-        e.preventDefault();
-        this.setState({
-            data: {
-                country: '',
-                city: '',
-                travelType: '',
-                placeType: '',
-                priceType: '',
-                peopleAmount: ''
-            }
-        });
-        this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-    }
+   
 
     handleChoose() {
         if (this.state.data.country !== '') {
@@ -268,6 +256,25 @@ class PlaceFormComp extends React.Component {
                             <Input value={this.state.data.placeType} disabled className="dp-input" />
                         </InputGroup>
 
+
+                        <br />
+                        <div className="slidecontainer">
+                            <Input placeholder="Approximate Price"
+                                value={this.state.data.price}
+                                disabled
+                            />
+                            <input
+                                type="range"
+                                min={GetMinPrice(this.state.data.priceType, this.state.data.placeType)}
+                                max={GetMaxPrice(this.state.data.priceType, this.state.data.placeType)}
+                                value={this.state.data.price}
+                                name="price"
+                                className="slider"
+                                onChange={this.handleChange}
+                                id="myRange" />
+                            <p>Approximate Price: <span > {this.state.data.price}</span></p>
+                        </div>
+                        <br />
                         <Input type="submit" value="Suggest Place"/>
 
                     </form>
@@ -283,3 +290,65 @@ export default PlaceFormComp;
 let travelTypeList = ["Relaxing", "Sport", "Educational", "Bussiness"];
 let priceTypeList = ["Minimum", "Medium", "Expensive", "Luxury"];
 let placeTypeList = ["Restaurant", "Hotel", "Museum", "Monument", "Entertaiment"];
+
+function GetMinPrice(priceType, placeType) {
+    if (priceType === "Minimum") {
+        if (placeType === "Restaurant") { return 1; }
+        if (placeType === "Hotel") { return 10; }
+        if (placeType === "Museum") { return 0; }
+        if (placeType === "Monument") { return 0; }
+        if (placeType === "Entertaiment") { return 0; }
+    }
+    if (priceType === "Medium") {
+        if (placeType === "Restaurant") { return 10; }
+        if (placeType === "Hotel") { return 30; }
+        if (placeType === "Museum") { return 15; }
+        if (placeType === "Monument") { return 15; }
+        if (placeType === "Entertaiment") { return 15; }
+    }
+    if (priceType === "Expensive") {
+        if (placeType === "Restaurant") { return 25; }
+        if (placeType === "Hotel") { return 100; }
+        if (placeType === "Museum") { return 30; }
+        if (placeType === "Monument") { return 15; }
+        if (placeType === "Entertaiment") { return 30; }
+    }
+    if (priceType === "Luxury") {
+        if (placeType === "Restaurant") { return 50; }
+        if (placeType === "Hotel") { return 200; }
+        if (placeType === "Museum") { return 100; }
+        if (placeType === "Monument") { return 20; }
+        if (placeType === "Entertaiment") { return 100; }
+    }
+}
+
+function GetMaxPrice(priceType, placeType) {
+    if (priceType === "Minimum") {
+        if (placeType === "Restaurant") { return 10; }
+        if (placeType === "Hotel") { return 30; }
+        if (placeType === "Museum") { return 15; }
+        if (placeType === "Monument") { return 10; }
+        if (placeType === "Entertaiment") { return 15; }
+    }
+    if (priceType === "Medium") {
+        if (placeType === "Restaurant") { return 25; }
+        if (placeType === "Hotel") { return 100; }
+        if (placeType === "Museum") { return 30; }
+        if (placeType === "Monument") { return 15; }
+        if (placeType === "Entertaiment") { return 30; }
+    }
+    if (priceType === "Expensive") {
+        if (placeType === "Restaurant") { return 50; }
+        if (placeType === "Hotel") { return 200; }
+        if (placeType === "Museum") { return 100; }
+        if (placeType === "Monument") { return 20; }
+        if (placeType === "Entertaiment") { return 100; }
+    }
+    if (priceType === "Luxury") {
+        if (placeType === "Restaurant") { return 1000; }
+        if (placeType === "Hotel") { return 10000; }
+        if (placeType === "Museum") { return 500; }
+        if (placeType === "Monument") { return 25; }
+        if (placeType === "Entertaiment") { return 1000; }
+    }
+}
