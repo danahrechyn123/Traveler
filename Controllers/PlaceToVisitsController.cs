@@ -105,12 +105,20 @@ namespace Traveler.Controllers
                                         .ToArray();
             return places;
         }
+
         [HttpPost("getPlacesIdData")]
         public IEnumerable<PlaceToVisit> GetPlacesForTravelIdData([FromBody]TravelDTO travel)
         {
              var places = _context.Places.Where(p => p.CityId == travel.CityId)
                                         .Where(P => P.PriceType == travel.PriceType)
                                         .ToArray();
+            return places;
+        }
+
+        [HttpPost("getPlacesByType")]
+        public IEnumerable<PlaceToVisit> GetPlacesByType([FromBody]PlaceType placeType)
+        {
+            var places = _context.Places.Where(pl => pl.PlaceType == placeType).ToArray();
             return places;
         }
 

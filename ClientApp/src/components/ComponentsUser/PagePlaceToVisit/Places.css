@@ -104,3 +104,19 @@ p.greeting {
         background: #4CAF50;
         cursor: pointer;
     }
+
+.tab-nav{
+    background-color:transparent;
+}
+.place-tab-div {  
+    overflow-y:scroll;
+    height: 100vh;
+    border: solid 1px grey;
+    padding:20px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-color: rgb(255, 255, 255, 0.5);
+}
+.place-tab-div::-webkit-scrollbar {
+    width: 0 !important
+}

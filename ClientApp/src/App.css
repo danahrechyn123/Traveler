@@ -10,7 +10,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: blue;
     padding-top: 12vh;
 }
 .PersonalPage {
@@ -19,18 +18,20 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: blue;
     padding-top: 12vh;
 }
 .CreatePlace {
-    background-color: blue;
     padding-top: 9vh;
     padding-bottom: 11vh;
     min-height: 100vh;
     height: inherit;
 }
 .Places {
-    background-color: brown;
+    background-image: url(../src/images/PersonaPageBg.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     padding-top: 10vh;
 }
 

@@ -1,4 +1,6 @@
 ﻿import { parsePriceType, parsePlaceType } from './TravelService';
+import { handleError, handleResponse } from '../helpers';
+
 
 export const placeService = {
     suggestPlace,
@@ -32,8 +34,25 @@ function suggestPlace(place) {
     return fetch('api/PlaceToVisits/suggestPlace', requestOptions);
 }
 
+
+function getPlacesByType(placeName) {
+    var placeType = parsePlaceType(placeName);
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(placeType)
+    };
+
+    return fetch('api/PlaceToVisits/getPlacesByType', requestOptions)
+        .then(handleResponse, handleError)
+        .then(res => {
+            return res;
+        })
+        .catch();  
+}
+
 function acceptPlace(place) { }
 function getPlacesByCountry(place) { }
 function getPlacesByCity(place) { }
-function getPlacesByType(place) { }
 function getPlaceByUserId(place) { }

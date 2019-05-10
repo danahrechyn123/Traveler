@@ -50,11 +50,11 @@ class PlaceCard extends React.Component {
                             <CardHeader className="place-card-header">{parsePlaceType(this.props.placeType)}</CardHeader>
                             <CardBody>
                                 <img src={this.props.imgUrl}
-                                    width="187px" />
+                                    width="250px" />
                                 <br />
-                                <div className="place-card-info">
-                                    Name: {this.props.name}
-                                    About: {this.props.about}
+                            <div className="place-card-info">
+                                <p>Name: {this.props.name}</p>
+                                <p> About: {this.props.about}</p>
                                 </div>
                             </CardBody>
                         <CardFooter onClick={this.handleAddPlace}>

@@ -60,16 +60,23 @@
         width: 0 !important
     }
 /*place card*/
+@font-face {
+    font-family: Raleway-Light;
+    src: url(../../../fonts/Raleway/Raleway-Light.ttf);
+}
 .place-card {
-    max-width: 190px;
+    width: 251px;
     color: black;
     border: solid 1px white;
     border-radius: 30px;
     background-color: rgb(255, 255, 255, 0.7);
     padding: 0;
+    height:500px;
+
 }
 .place-card-back {
-    max-width: 190px;
+    height: 500px;
+    width: 251px;
     color: white;
     border: solid 1px white;
     border-radius: 30px;
@@ -77,10 +84,12 @@
     padding: 0;
 }
 .place-back-card-body {
-    min-height: 120px;
+    font-family: Raleway-Light;
+    font-size: 22px;
+    padding-top:130px;
 }
 .place-card-info {
-    max-height: 120px;
+    max-height:180px;
     overflow-y: scroll;
 }
 .place-card-info::-webkit-scrollbar {
@@ -97,4 +106,6 @@
     text-align: center;
     color: black;
     border-radius: 30px;
+    font-family:Raleway-Light;
+    font-size:22px;
 }
