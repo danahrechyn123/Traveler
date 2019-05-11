@@ -116,7 +116,7 @@ class Places extends React.Component {
                             </Nav>
 
                             <TabContent activeTab={this.state.activeTab} className="place-tab-div">
-                                <TabPane tabId="Hotel">
+                                <TabPane tabId={this.state.activeTab}>
                                     <CardDeck>
                                         {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
                                             <PlaceCard
@@ -124,55 +124,8 @@ class Places extends React.Component {
                                                 name={place.name}
                                                 placeType={place.placeType}
                                                 imgUrl={place.imgUrl}
-                                                about={place.about} />
-                                        ))}
-                                    </CardDeck>
-                                </TabPane>
-                                <TabPane tabId="Restaurant">
-                                    <CardDeck>
-                                        {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
-                                            <PlaceCard
-                                                id={place.id}
-                                                name={place.name}
-                                                placeType={place.placeType}
-                                                imgUrl={place.imgUrl}
-                                                about={place.about} />
-                                        ))}
-                                    </CardDeck>
-                                </TabPane>
-                                <TabPane tabId="Museum">
-                                    <CardDeck>
-                                        {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
-                                            <PlaceCard
-                                                id={place.id}
-                                                name={place.name}
-                                                placeType={place.placeType}
-                                                imgUrl={place.imgUrl}
-                                                about={place.about} />
-                                        ))}
-                                    </CardDeck>
-                                </TabPane>
-                                <TabPane tabId="Monument">
-                                    <CardDeck>
-                                        {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
-                                            <PlaceCard
-                                                id={place.id}
-                                                name={place.name}
-                                                placeType={place.placeType}
-                                                imgUrl={place.imgUrl}
-                                                about={place.about} />
-                                        ))}
-                                    </CardDeck>
-                                </TabPane>
-                                <TabPane tabId="Entertaiment">
-                                    <CardDeck>
-                                        {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
-                                            <PlaceCard
-                                                id={place.id}
-                                                name={place.name}
-                                                placeType={place.placeType}
-                                                imgUrl={place.imgUrl}
-                                                about={place.about} />
+                                                about={place.about}
+                                                status={place.status} />
                                         ))}
                                     </CardDeck>
                                 </TabPane>
@@ -240,7 +193,7 @@ class Places extends React.Component {
                             </Nav>
 
                             <TabContent activeTab={this.state.activeTab} className="place-tab-div">
-                                <TabPane tabId="Hotel">
+                                <TabPane tabId={this.state.activeTab}>
                                     <CardDeck>
                                         {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
                                             <PlaceCard
@@ -248,67 +201,8 @@ class Places extends React.Component {
                                                 name={place.name}
                                                 placeType={place.placeType}
                                                 imgUrl={place.imgUrl}
-                                                about={place.about} />
-                                        ))}
-                                    </CardDeck>
-                                </TabPane>
-                                <TabPane tabId="Restaurant">
-                                    <CardDeck>
-                                        {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
-                                            <PlaceCard
-                                                id={place.id}
-                                                name={place.name}
-                                                placeType={place.placeType}
-                                                imgUrl={place.imgUrl}
-                                                about={place.about} />
-                                        ))}
-                                    </CardDeck>
-                                </TabPane>
-                                <TabPane tabId="Museum">
-                                    <CardDeck>
-                                        {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
-                                            <PlaceCard
-                                                id={place.id}
-                                                name={place.name}
-                                                placeType={place.placeType}
-                                                imgUrl={place.imgUrl}
-                                                about={place.about} />
-                                        ))}
-                                    </CardDeck>
-                                </TabPane>
-                                <TabPane tabId="Monument">
-                                    <CardDeck>
-                                        {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
-                                            <PlaceCard
-                                                id={place.id}
-                                                name={place.name}
-                                                placeType={place.placeType}
-                                                imgUrl={place.imgUrl}
-                                                about={place.about} />
-                                        ))}
-                                    </CardDeck>
-                                </TabPane>
-                                <TabPane tabId="Entertaiment">
-                                    <CardDeck>
-                                        {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
-                                            <PlaceCard
-                                                id={place.id}
-                                                name={place.name}
-                                                placeType={place.placeType}
-                                                imgUrl={place.imgUrl}
-                                                about={place.about} />
-                                        ))}
-                                    </CardDeck>
-                                </TabPane>
-                                <TabPane tabId="New">
-                                    <CardDeck>
-                                        {this.state.currentPlaceList && this.state.currentPlaceList.map((place) => (
-                                            <PlaceCard
-                                                id={place.id}
-                                                name={place.name}
-                                                placeType={place.placeType}
-                                                imgUrl={place.imgUrl}
-                                                about={place.about} />
+                                                about={place.about}
+                                                status={place.status} />
                                         ))}
                                     </CardDeck>
                                 </TabPane>
