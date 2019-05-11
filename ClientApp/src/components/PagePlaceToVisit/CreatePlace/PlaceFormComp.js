@@ -4,8 +4,8 @@ import {
     InputGroup, InputGroupText, InputGroupAddon, Input, Button, ButtonGroup
 } from 'reactstrap';
 import '../Places.css';
-import { dataService } from '../../../../services/DataService';
-import { placeService } from '../../../../services/PlaceService';
+import { dataService } from '../../../services/DataService';
+import { placeService } from '../../../services/PlaceService';
 
 class PlaceFormComp extends React.Component {
 

@@ -1,5 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css?family=Pacifico|Roboto:300,500,700");
-
+﻿
 *,
 *::before,
 *::after {
@@ -36,7 +35,7 @@ p.greeting {
 }
 
 .container .page1 {
-    /*todo*/ background-image: url("https://images.pexels.com/photos/355770/pexels-photo-355770.jpeg?cs=srgb&dl=adventure-alpine-background-355770.jpg&fm=jpg");
+   /*todo*/
     background-size: cover;
     background-position: 10%;
     max-width: 480px;
@@ -118,7 +117,7 @@ p.greeting {
     padding: 20px;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
-    background-color: rgb(255, 255, 255, 0.5);
+    background-color: rgb(255, 255, 255, 0.4);
 }
 
     .place-tab-div::-webkit-scrollbar {

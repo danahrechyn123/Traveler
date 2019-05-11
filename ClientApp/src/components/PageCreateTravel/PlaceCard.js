@@ -1,13 +1,11 @@
 ﻿import React from 'react';
 import './CreateTravel.css';
 import {
-    Card, CardHeader, CardFooter, CardBody,
-    CardTitle, CardText, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
-    InputGroup, InputGroupAddon, Input, Row, Col, CardDeck
+    Card, CardHeader, CardFooter, CardBody
 } from 'reactstrap';
 
 import ReactCardFlip from 'react-card-flip';
-import { adminService } from '../../../services/AdminService';
+import { adminService } from '../../services/AdminService';
 
 class PlaceCard extends React.Component {
 

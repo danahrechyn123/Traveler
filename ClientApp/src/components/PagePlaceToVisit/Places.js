@@ -5,7 +5,7 @@ import {
     CardDeck
 } from 'reactstrap';
 import classnames from 'classnames';
-import { placeService } from '../../../services/PlaceService';
+import { placeService } from '../../services/PlaceService';
 import PlaceCard from '../PageCreateTravel/PlaceCard';
 
 

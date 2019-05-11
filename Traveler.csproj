@@ -38,6 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\components\ComponentsUser\" />
+    <Folder Include="ClientApp\src\components\NewFolder\" />
     <Folder Include="ClientApp\src\images\" />
   </ItemGroup>
 

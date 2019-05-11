@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 import TravelListItem from './TravelListItem';
-import { travelService } from '../../../services/TravelService';
+import { travelService } from '../../services/TravelService';
 
 
 class PersonalPage extends React.Component {

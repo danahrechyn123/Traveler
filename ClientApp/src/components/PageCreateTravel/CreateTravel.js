@@ -7,8 +7,8 @@ import {
 } from 'reactstrap';
 
 import ReactCardFlip from 'react-card-flip';
-import { travelService } from '../../../services/TravelService';
-import { dataService } from '../../../services/DataService';
+import { travelService } from '../../services/TravelService';
+import { dataService } from '../../services/DataService';
 import  PlaceCard  from './PlaceCard';
 
 class CreateTravel extends React.Component {

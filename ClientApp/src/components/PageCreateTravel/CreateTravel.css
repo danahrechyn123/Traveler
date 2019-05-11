@@ -62,7 +62,7 @@
 /*place card*/
 @font-face {
     font-family: Raleway-Light;
-    src: url(../../../fonts/Raleway/Raleway-Light.ttf);
+    src: url(../../fonts/Raleway/Raleway-Light.ttf);
 }
 
 .place-card {

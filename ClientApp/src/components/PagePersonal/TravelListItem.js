@@ -3,7 +3,7 @@ import {
     ListGroupItem, ListGroupItemText, ListGroupItemHeading, Badge,
     Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
-import { travelService } from '../../../services/TravelService';
+import { travelService } from '../../services/TravelService';
 import PlaceCard from '../PageCreateTravel/PlaceCard';
 
 
