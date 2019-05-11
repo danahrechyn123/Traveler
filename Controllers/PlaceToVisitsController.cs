@@ -30,48 +30,15 @@ namespace Traveler.Controllers
             return await _context.Places.ToListAsync();
         }
 
-        // GET: api/PlaceToVisits/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PlaceToVisit>> GetPlaceToVisit(int id)
-        {
-            var placeToVisit = await _context.Places.FindAsync(id);
-
-            if (placeToVisit == null)
-            {
-                return NotFound();
-            }
-
-            return placeToVisit;
-        }
+        
 
         // PUT: api/PlaceToVisits/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPlaceToVisit(int id, PlaceToVisit placeToVisit)
+        [HttpPut("acceptPlace")]
+        public void AcceptPlace([FromBody]int id)
         {
-            if (id != placeToVisit.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(placeToVisit).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PlaceToVisitExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var place = _context.Places.Find(id);
+            place.Status = 1;
+            _context.SaveChanges();            
         }
 
 
@@ -96,6 +63,7 @@ namespace Traveler.Controllers
             
         }
 
+
         [HttpPost("getPlaces")]
         public IEnumerable<PlaceToVisit> GetPlacesForTravel([FromBody]TravelDTO travel)
         {
@@ -105,6 +73,8 @@ namespace Traveler.Controllers
                                         .ToArray();
             return places;
         }
+
+
         [HttpPost("getPlacesIdData")]
         public IEnumerable<PlaceToVisit> GetPlacesForTravelIdData([FromBody]TravelDTO travel)
         {
@@ -113,6 +83,8 @@ namespace Traveler.Controllers
                                         .ToArray();
             return places;
         }
+
+
         [HttpPost("getPlacesByType")]
         public IEnumerable<PlaceToVisit> GetPlacesByType([FromBody]PlaceType placeType)
         {
@@ -120,6 +92,7 @@ namespace Traveler.Controllers
                 .Where(pl => pl.Status == 1).ToArray();
             return places;
         }
+
 
         [HttpPost("getNewPlaces")]
         public IEnumerable<PlaceToVisit> GetNewPlaces()
@@ -129,25 +102,16 @@ namespace Traveler.Controllers
         }
 
 
-        // DELETE: api/PlaceToVisits/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<PlaceToVisit>> DeletePlaceToVisit(int id)
+        // DELETE: 
+        [HttpDelete("deletePlace")]
+        public void DeletePlaceToVisit([FromBody]int id)
         {
-            var placeToVisit = await _context.Places.FindAsync(id);
-            if (placeToVisit == null)
-            {
-                return NotFound();
-            }
+            var placeToVisit = _context.Places.Find(id);          
 
             _context.Places.Remove(placeToVisit);
-            await _context.SaveChangesAsync();
-
-            return placeToVisit;
+            _context.SaveChanges();            
         }
 
-        private bool PlaceToVisitExists(int id)
-        {
-            return _context.Places.Any(e => e.Id == id);
-        }
+      
     }
 }

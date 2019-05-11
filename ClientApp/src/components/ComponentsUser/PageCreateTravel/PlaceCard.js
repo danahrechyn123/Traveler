@@ -7,9 +7,7 @@ import {
 } from 'reactstrap';
 
 import ReactCardFlip from 'react-card-flip';
-
-import { travelService } from '../../../services/TravelService';
-import { dataService } from '../../../services/DataService';
+import { adminService } from '../../../services/AdminService';
 
 class PlaceCard extends React.Component {
 
@@ -40,6 +38,7 @@ class PlaceCard extends React.Component {
             isFlipped: !prevState.isFlipped,
             actionPhrase: 'The cart was accepted!'
         }));
+        adminService.acceptPlace(this.props.id);
     }
 
     DeletePlace(){
@@ -47,6 +46,8 @@ class PlaceCard extends React.Component {
             isFlipped: !prevState.isFlipped,
             actionPhrase: 'The cart was declined!'
         }));
+
+        adminService.deletePlace(this.props.id);
     }
 
 
