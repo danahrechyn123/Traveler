@@ -8,7 +8,8 @@ export const placeService = {
     getPlacesByCountry,
     getPlacesByCity,
     getPlacesByType,
-    getPlaceByUserId
+    getPlaceByUserId,
+    getNewPlaces
 };
 
 function suggestPlace(place) {
@@ -45,6 +46,22 @@ function getPlacesByType(placeName) {
     };
 
     return fetch('api/PlaceToVisits/getPlacesByType', requestOptions)
+        .then(handleResponse, handleError)
+        .then(res => {
+            return res;
+        })
+        .catch();
+}
+
+
+function getNewPlaces() {
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    };
+
+    return fetch('api/PlaceToVisits/getNewPlaces', requestOptions)
         .then(handleResponse, handleError)
         .then(res => {
             return res;

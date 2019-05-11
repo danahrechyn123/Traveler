@@ -116,7 +116,15 @@ namespace Traveler.Controllers
         [HttpPost("getPlacesByType")]
         public IEnumerable<PlaceToVisit> GetPlacesByType([FromBody]PlaceType placeType)
         {
-            var places = _context.Places.Where(pl => pl.PlaceType == placeType).ToArray();
+            var places = _context.Places.Where(pl => pl.PlaceType == placeType)
+                .Where(pl => pl.Status == 1).ToArray();
+            return places;
+        }
+
+        [HttpPost("getNewPlaces")]
+        public IEnumerable<PlaceToVisit> GetNewPlaces()
+        {
+            var places = _context.Places.Where(pl => pl.Status == 0).ToArray();
             return places;
         }
 
