@@ -113,6 +113,13 @@ namespace Traveler.Controllers
                                         .ToArray();
             return places;
         }
+        [HttpPost("getPlacesByType")]
+        public IEnumerable<PlaceToVisit> GetPlacesByType([FromBody]PlaceType placeType)
+        {
+            var places = _context.Places.Where(pl => pl.PlaceType == placeType).ToArray();
+            return places;
+        }
+
 
         // DELETE: api/PlaceToVisits/5
         [HttpDelete("{id}")]

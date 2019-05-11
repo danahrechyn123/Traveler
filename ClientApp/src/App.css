@@ -30,7 +30,11 @@
     height: inherit;
 }
 .Places {
-    background-color: brown;
+    background-image: url(../src/images/PersonaPageBg.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     padding-top: 10vh;
 }
 

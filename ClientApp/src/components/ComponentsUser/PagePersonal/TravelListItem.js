@@ -25,6 +25,7 @@ class TravelListItem extends React.Component {
         };
 
         travelService.getPlacesIdData(travelData).then(res => {
+            console.log(res);
             this.setState({
                 placeList: res,
                 modal: true
