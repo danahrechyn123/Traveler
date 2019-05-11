@@ -24,7 +24,7 @@ class NavMenu extends React.Component {
                     <div id="NavMenu" className="d-flex flex-column flex-md-row align-items-center container-fluid bg-white border-bottom ">
                         <h2 className=" mr-md-auto"><Link to={'/'} exact className="btn btn-outline-primary">Home</Link></h2>
 
-                        <h2><Link className="btn btn-outline-primary" to={'/travellist'}>Users</Link></h2>
+                        <h2><Link className="btn btn-outline-primary" to={'/users'}>Users</Link></h2>
                         <h2><Link className="btn btn-outline-primary" to={'/mustvisit'}>Places</Link></h2>
                         <h2 className="btn btn-outline-primary">Hello, admin</h2>
 

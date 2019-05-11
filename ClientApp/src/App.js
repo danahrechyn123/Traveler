@@ -9,6 +9,7 @@ import CreateTravel from './components/PageCreateTravel/CreateTravel';
 import PersonalPage from './components/PagePersonal/PersonalPage';
 import Places from './components/PagePlaceToVisit/Places';
 import CreatePlace from './components/PagePlaceToVisit/CreatePlace/CreatePlace';
+import UserControllPage from './components/PageUsersControll/UserControllPage';
 import { withRouter } from 'react-router';
 import Layout from './components/Layout';
 
@@ -23,6 +24,7 @@ class App extends React.Component {
               <Route path="/createplace" component={CreatePlace} />
               <Route path="/mustvisit" component={Places} />
               <Route path="/personalpage" component={PersonalPage} />
+              <Route path="/users" component={UserControllPage} />
           </Layout>  
     );
   }
