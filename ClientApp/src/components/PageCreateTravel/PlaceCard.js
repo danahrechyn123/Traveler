@@ -162,8 +162,8 @@ class PlaceCard extends React.Component {
                                             About: {this.props.about}
                                         </div>
                                     </CardBody>
-                                    <CardFooter onClick={this.Place}>
-                                        <p>Save</p>
+                                    <CardFooter onClick={this.DeletePlaceFromTravel}>
+                                        <p>Delete</p>
                                     </CardFooter>
 
                                 </Card>
