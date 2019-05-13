@@ -4,10 +4,11 @@
 }
 
 h3 {
-    margin-top:0;
-    font-size:37px;
+    margin-top: 0;
+    font-size: 37px;
     font-family: NEOTERICc;
 }
+
 .personal-card {
     left: 50%;
     margin-left: -45vw;
@@ -17,27 +18,49 @@ h3 {
     border-radius: 30px;
     background-color: rgb(255, 255, 255, 0.5);
 }
+
 .personal-card-header:first-child {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     text-align: center;
     background-color: rgb(255, 255, 255, 0.6);
 }
-.personal-card-body{
-    overflow-y:scroll;
+
+.personal-card-body {
+    overflow-y: scroll;
 }
-.personal-card-body::-webkit-scrollbar {
-    width: 0 !important
-}
+
+    .personal-card-body::-webkit-scrollbar {
+        width: 0 !important
+    }
 
 /* Travel List Item*/
 
 .list-group-item {
     margin-top: 20px;
     background-color: rgb(255, 255, 255, 0.75);
-   
     border: solid 1px grey;
 }
+
 .list-group-item:hover {
-        background-color: rgb(255, 255, 255, 1);
- }
+    background-color: rgb(255, 255, 255, 1);
+}
+
+/* travel-model */
+.travel-model {
+    min-width: 82vw;
+}
+
+.travel-model-body {
+    min-height: 90vh;
+}
+
+.travel-model-header, .travel-model-footer {
+    background-color: rgb(255, 255, 255,0.9);
+}
+
+.modal-content {
+    background-color: rgb(4, 85, 103);
+    filter: none;
+}
+

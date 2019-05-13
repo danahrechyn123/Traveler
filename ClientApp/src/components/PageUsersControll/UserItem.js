@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { ListGroupItem } from 'reactstrap';
+import { ListGroupItem, ButtonGroup, Button } from 'reactstrap';
 
 class UserItem extends React.Component {
 
@@ -23,7 +23,14 @@ class UserItem extends React.Component {
 
         return (           
             <ListGroupItem active tag="button" action>
-                Cras justo odio
+                <div className="user-info">
+                    <h2>{this.props.firstname} {this.props.lastname}</h2>
+                </div>
+                <ButtonGroup className="user-btn">
+                    <Button>Delete</Button>
+                    <Button>Add to admins</Button>
+                    <Button>Block</Button>
+                </ButtonGroup>
             </ListGroupItem>              
             
         );

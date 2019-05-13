@@ -1,34 +1,40 @@
 ﻿import React from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
+import { userService } from '../../services/UserService';
+import UserItem from './UserItem';
 
 class UserControllPage extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            userList:''
+        };
     }
 
     componentWillMount() {
-         
+        userService.getAll().then(res => {
+            this.setState({
+                userList: res
+            });
+        });
     }
 
-    toggle(tab) {
-        if (this.state.activeTab !== tab) {
-            this.setState({
-                activeTab: tab
-            });
-        }
-    }
+  
 
     render() {
         
         return (
             <div className="UserControll container-fluid">
                 <ListGroup>
-                    <ListGroupItem active tag="button" action>Cras justo odio</ListGroupItem>
-                    <ListGroupItem tag="button" action>Dapibus ac facilisis in</ListGroupItem>
-                    <ListGroupItem tag="button" action>Morbi leo risus</ListGroupItem>
-                    <ListGroupItem tag="button" action>Porta ac consectetur ac</ListGroupItem>
-                    <ListGroupItem disabled tag="button" action>Vestibulum at eros</ListGroupItem>
+                    {this.state.userList && this.state.userList.map((user) => (
+                        <UserItem
+                            firstname={user.firstname}
+                            lastname={user.lastname}
+                            username={user.username}
+                            role={user.role}
+                        />
+                    ))}
                 </ListGroup>
             </div>
         );

@@ -89,17 +89,18 @@ namespace Traveler.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpPost("getall")]
+        public IEnumerable<UserDto> GetAll()
         {
             var users =  userService.GetAll();
             List<UserDto> userDtos = users.Select(user => new UserDto
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Username = user.Username
+                Username = user.Username,
+                Role = user.Role
             }).ToList();
-            return Ok(userDtos);
+            return userDtos;
         }
 
         [HttpGet("{id}")]

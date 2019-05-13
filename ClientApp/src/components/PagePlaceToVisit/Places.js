@@ -79,7 +79,7 @@ class Places extends React.Component {
                                         onClick={() => { this.toggle('Entertaiment'); }}
                                     >
                                         Entertaiments
-                        </NavLink>
+                                    </NavLink>
                                 </NavItem>
                                 <NavItem className="tab-nav-item">
                                     <NavLink
@@ -87,7 +87,7 @@ class Places extends React.Component {
                                         onClick={() => { this.toggle('Hotel'); }}
                                     >
                                         Hotels
-                            </NavLink>
+                                    </NavLink>
                                 </NavItem>
                                 <NavItem className="tab-nav-item">
                                     <NavLink
@@ -95,7 +95,7 @@ class Places extends React.Component {
                                         onClick={() => { this.toggle('Restaurant'); }}
                                     >
                                         Restaurants
-                        </NavLink>
+                                    </NavLink>
                                 </NavItem>
                                 <NavItem className="tab-nav-item">
                                     <NavLink
@@ -103,7 +103,7 @@ class Places extends React.Component {
                                         onClick={() => { this.toggle('Monument'); }}
                                     >
                                         Monuments
-                        </NavLink>
+                                     </NavLink>
                                 </NavItem>
                                 <NavItem className="tab-nav-item">
                                     <NavLink
@@ -111,7 +111,7 @@ class Places extends React.Component {
                                         onClick={() => { this.toggle('Museum'); }}
                                     >
                                         Museums
-                        </NavLink>
+                                     </NavLink>
                                 </NavItem>
                             </Nav>
 

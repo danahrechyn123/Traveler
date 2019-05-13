@@ -14,8 +14,7 @@ function getCountries() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
     };
-
-    var countries;
+    
     return fetch('/api/Data/countries', requestOptions)
         .then(handleResponse, handleError)
         .then(res => {

@@ -1,9 +1,11 @@
 ﻿import React from 'react';
 import {
-    ListGroupItem, ListGroupItemText, ListGroupItemHeading, Badge,
-    Modal, ModalHeader, ModalBody, ModalFooter
+    ListGroupItem, ListGroupItemText, ListGroupItemHeading, Badge, TabContent, TabPane,
+    Modal, ModalHeader, ModalBody, ModalFooter, CardDeck, Nav, NavItem, NavLink
 } from 'reactstrap';
+import classnames from 'classnames';
 import { travelService } from '../../services/TravelService';
+import { placeService } from '../../services/PlaceService';
 import PlaceCard from '../PageCreateTravel/PlaceCard';
 
 
@@ -13,32 +15,57 @@ class TravelListItem extends React.Component {
         super(props);
         this.state = {
             modal: false,
-            placeList:''
+            placeList: '',
+            activeTab: 'All'
         };
         
     }
 
-    toggleOpen = () =>  {
+    toggleOpen = () => {
+        this.setState({
+            activeTab: 'All',
+            placeList: ''
+        });
         const travelData = {
             city: this.props.cityId,
             priceType: this.props.priceType
         };
 
         travelService.getPlacesIdData(travelData).then(res => {
-            console.log(res);
             this.setState({
                 placeList: res,
                 modal: true
             });
         }).catch(err => console.log(err));
-
     }
+
     toggleClose = () => {
         this.setState(prevState => ({
             modal: false,
             places:''
         }));
     }
+
+    toggleTabSaved = () => {
+         
+        this.setState({
+            activeTab: 'Saved',
+            placeList:''
+        });
+
+        placeService.getSavedPlaces(this.props.id).then(res => {
+            console.log(res);
+            this.setState({
+                placeList: res
+            });
+        }).catch(err => console.log(err));
+
+    }
+
+    toggleTabAll = () => {
+        //the same as toggleOpen 
+    }
+
 
     render() {
 
@@ -54,20 +81,50 @@ class TravelListItem extends React.Component {
                     </ListGroupItemText>
                 </ListGroupItem>
 
-                <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>{this.props.city} ({this.props.country})</ModalHeader>
+              
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className="travel-model">
+                    <ModalHeader toggle={this.toggle} className="travel-model-header">{this.props.city} ({this.props.country})</ModalHeader>
 
-                    <ModalBody>
-                        {this.state.placeList && this.state.placeList.map((place) => (
-                            <PlaceCard
-                                id={place.id}
-                                name={place.name}
-                                placeType={place.placeType}
-                                imgUrl={place.imgUrl}
-                                about={place.about} />
-                        ))}
+                    <ModalBody className="travel-model-body">
+                        <Nav tabs className="tab-nav">
+                            <NavItem className="tab-nav-item">
+                                <NavLink
+                                    className={classnames({ active: this.state.activeTab === 'All' })}
+                                    onClick={this.toggleOpen}
+                                >
+                                    All
+                                     </NavLink>
+                            </NavItem>
+                            <NavItem className="tab-nav-item">
+                                <NavLink
+                                    className={classnames({ active: this.state.activeTab === 'Saved' })}
+                                    onClick={this.toggleTabSaved}
+                                >
+                                    Saved
+                                     </NavLink>
+                            </NavItem>
+                        </Nav>
+                        <TabContent activeTab={this.state.activeTab} className="place-tab-div">
+                            <TabPane tabId={this.state.activeTab}>
+                                <CardDeck>
+                                    {this.state.placeList && this.state.placeList.map((place) => (
+                                        <PlaceCard
+                                            id={place.id}
+                                            name={place.name}
+                                            placeType={place.placeType}
+                                            imgUrl={place.imgUrl}
+                                            about={place.about}
+                                            for="travel-list-place"
+                                            travelId={this.props.id}
+                                            status={this.state.activeTab}
+                                        />
+                                    ))}
+                                </CardDeck>
+                            </TabPane>
+                        </TabContent>
+                       
                     </ModalBody>
-                    <ModalFooter onClick={this.toggleClose}>Cancel </ModalFooter>
+                    <ModalFooter onClick={this.toggleClose} className="travel-model-footer">Cancel </ModalFooter>
                 </Modal>
             </div>
         );

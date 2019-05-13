@@ -36,12 +36,18 @@ function logout() {
 }
 
 function getAll() {
+
     const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
     };
 
-    return fetch(config.apiUrl + '/api/users', requestOptions).then(handleResponse, handleError);
+    return fetch('/api/users/getall', requestOptions)
+        .then(res => {
+            console.log(res);
+            return res;
+        })
+        .catch();
 }
 
 function getById(id) {

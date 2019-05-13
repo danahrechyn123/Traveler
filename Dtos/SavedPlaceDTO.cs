@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Traveler.Entities
+namespace Traveler.Dtos
 {
-    public class SavedPlaces
+    public class SavedPlaceDTO
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public int TravelId { get; set; }
         public int PlaceId { get; set; }
     }
 }

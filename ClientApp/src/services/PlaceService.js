@@ -4,12 +4,11 @@ import { handleError, handleResponse } from '../helpers';
 
 export const placeService = {
     suggestPlace,
-    acceptPlace,
-    getPlacesByCountry,
-    getPlacesByCity,
     getPlacesByType,
-    getPlaceByUserId,
-    getNewPlaces
+    getNewPlaces,
+    addPlaceToTravel,
+    getSavedPlaces,
+    deletePlaceFromTravel
 };
 
 function suggestPlace(place) {
@@ -35,7 +34,6 @@ function suggestPlace(place) {
     return fetch('api/PlaceToVisits/suggestPlace', requestOptions);
 }
 
-
 function getPlacesByType(placeName) {
     var placeType = parsePlaceType(placeName);
 
@@ -53,7 +51,6 @@ function getPlacesByType(placeName) {
         .catch();
 }
 
-
 function getNewPlaces() {
 
     const requestOptions = {
@@ -69,7 +66,54 @@ function getNewPlaces() {
         .catch();
 }
 
-function acceptPlace(place) { }
-function getPlacesByCountry(place) { }
-function getPlacesByCity(place) { }
-function getPlaceByUserId(place) { }
+function addPlaceToTravel(placeId, travelId) {
+
+    const data = {
+        Placeid: placeId,
+        TravelId: travelId
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    };
+
+    return fetch('api/SavedPlace/', requestOptions)
+        .then(handleResponse, handleError)
+        .catch();
+}
+
+function getSavedPlaces(travelId) {
+    
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(travelId)
+    };
+
+    return fetch('api/SavedPlace/getSaved', requestOptions)
+        .then(handleResponse, handleError)
+        .then(res => {
+            return res;
+        })
+        .catch();
+}
+
+function deletePlaceFromTravel(placeId, travelId) {
+
+    const data = {
+        Placeid: placeId,
+        TravelId: travelId
+    };
+
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    };
+
+    return fetch('api/SavedPlace/', requestOptions)
+        .then(handleResponse, handleError)
+        .catch();
+}
