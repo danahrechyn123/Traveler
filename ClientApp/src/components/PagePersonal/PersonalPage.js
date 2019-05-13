@@ -82,6 +82,7 @@ class PersonalPage extends React.Component {
                                             date={tr.date}
                                             priceType={tr.priceType}
                                             registedAmount={tr.registedAmount}
+                                            userId={currentUser.id}
                                         />
                                     ))}
 

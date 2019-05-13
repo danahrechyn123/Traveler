@@ -68,20 +68,62 @@ namespace Traveler.Controllers
         public IEnumerable<PlaceToVisit> GetPlacesForTravel([FromBody]TravelDTO travel)
         {
             var CityId = _context.Cities.Where(c => c.Name == travel.CityName).Select(c => c.Id).First();
-            var places = _context.Places.Where(p => p.CityId == CityId)
-                                        .Where(P => P.PriceType == travel.PriceType)
-                                        .ToArray();
+            var places = new List<PlaceToVisit>();
+            if (travel.PriceType == PriceType.Minimum)
+            {
+                places = _context.Places.Where(p => p.CityId == CityId)
+                                           .Where(P => P.PriceType == 0)
+                                           .Where(p => p.Status == 1)
+                                           .ToList();
+            }
+            else if (travel.PriceType == PriceType.Medium)
+            {
+                places = _context.Places.Where(p => p.CityId == CityId)
+                         .Where(P => (P.PriceType == PriceType.Minimum) || (P.PriceType == PriceType.Medium))
+                         .Where(p => p.Status == 1)
+                         .ToList();
+            }
+            else
+            {
+                places = _context.Places.Where(p => p.CityId == CityId)
+                    .Where(p => p.Status == 1)
+                    .ToList();
+
+            }
+            
             return places;
         }
 
 
         [HttpPost("getPlacesIdData")]
-        public IEnumerable<PlaceToVisit> GetPlacesForTravelIdData([FromBody]TravelDTO travel)
+        public IEnumerable<PlaceToVisit> GetPlacesForTravelIdData([FromBody]TravelDTO tr)
         {
-             var places = _context.Places.Where(p => p.CityId == travel.CityId)
-                                        .Where(P => P.PriceType == travel.PriceType)
-                                        .ToArray();
-            return places;
+            var travel = _context.Travels.Where(t => t.Id == tr.Id).First();
+            var alreadySavedId = _context.SavedPlaces.Where(x => x.TravelId == tr.Id).Select(x => x.PlaceId).ToList();
+            var alreadySaved = _context.Places.Where(x => alreadySavedId.Contains(x.Id)).ToList();
+
+            var places = new List<PlaceToVisit>();
+            if (travel.PriceType == PriceType.Minimum)
+            {
+                places = _context.Places.Where(p => p.CityId == travel.CityId)
+                                           .Where(P => P.PriceType == 0)
+                                           .Where(p => p.Status == 1)
+                                           .ToList();
+            }
+            else if (travel.PriceType == PriceType.Medium)
+            {
+                places = _context.Places.Where(p => p.CityId == travel.CityId)
+                         .Where(P => (P.PriceType == PriceType.Minimum)||(P.PriceType == PriceType.Medium))
+                         .Where(p => p.Status == 1)
+                         .ToList();
+            }
+            else
+            {
+                places = _context.Places.Where(p => p.CityId == travel.CityId).Where(p => p.Status == 1).ToList();
+
+            }
+
+            return places.Except(alreadySaved);
         }
 
 

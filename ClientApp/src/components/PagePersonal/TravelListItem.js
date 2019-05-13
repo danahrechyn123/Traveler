@@ -26,12 +26,9 @@ class TravelListItem extends React.Component {
             activeTab: 'All',
             placeList: ''
         });
-        const travelData = {
-            city: this.props.cityId,
-            priceType: this.props.priceType
-        };
+       
 
-        travelService.getPlacesIdData(travelData).then(res => {
+        travelService.getPlacesIdData(this.props.id, this.props.userId).then(res => {
             this.setState({
                 placeList: res,
                 modal: true

@@ -8,6 +8,7 @@ namespace Traveler.Dtos
 {
     public class TravelDTO
     {
+        public int Id { get; set; }
         public string CityName { get; set; }
         public int CityId { get; set; }
         public PriceType PriceType { get; set; }

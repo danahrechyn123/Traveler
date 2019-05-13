@@ -52,17 +52,17 @@ function getPlacesStrData(travel) {
         .catch();    
 }
 
-function getPlacesIdData(travel) {
+function getPlacesIdData(travelId, userId) {
 
-    const tr = {
-        CityId: travel.city,
-        PriceType: travel.priceType
+    const travel = {
+        Id: travelId,
+        UserId: userId
     };
 
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(tr)
+        body: JSON.stringify(travel)
     };
     return fetch('/api/PlaceToVisits/getPlacesIdData', requestOptions)
         .then(handleResponse, handleError)

@@ -288,7 +288,7 @@ export default PlaceFormComp;
 
 
 let travelTypeList = ["Relaxing", "Sport", "Educational", "Bussiness"];
-let priceTypeList = ["Minimum", "Medium", "Expensive", "Luxury"];
+let priceTypeList = ["Minimum", "Medium", "Expensive"];
 let placeTypeList = ["Restaurant", "Hotel", "Museum", "Monument", "Entertaiment"];
 
 function GetMinPrice(priceType, placeType) {
@@ -307,19 +307,13 @@ function GetMinPrice(priceType, placeType) {
         if (placeType === "Entertaiment") { return 15; }
     }
     if (priceType === "Expensive") {
-        if (placeType === "Restaurant") { return 25; }
-        if (placeType === "Hotel") { return 100; }
-        if (placeType === "Museum") { return 30; }
-        if (placeType === "Monument") { return 15; }
-        if (placeType === "Entertaiment") { return 30; }
-    }
-    if (priceType === "Luxury") {
-        if (placeType === "Restaurant") { return 50; }
+        if (placeType === "Restaurant") { return 75; }
         if (placeType === "Hotel") { return 200; }
-        if (placeType === "Museum") { return 100; }
-        if (placeType === "Monument") { return 20; }
+        if (placeType === "Museum") { return 50; }
+        if (placeType === "Monument") { return 15; }
         if (placeType === "Entertaiment") { return 100; }
     }
+    
 }
 
 function GetMaxPrice(priceType, placeType) {
@@ -331,24 +325,18 @@ function GetMaxPrice(priceType, placeType) {
         if (placeType === "Entertaiment") { return 15; }
     }
     if (priceType === "Medium") {
-        if (placeType === "Restaurant") { return 25; }
-        if (placeType === "Hotel") { return 100; }
-        if (placeType === "Museum") { return 30; }
-        if (placeType === "Monument") { return 15; }
-        if (placeType === "Entertaiment") { return 30; }
-    }
-    if (priceType === "Expensive") {
-        if (placeType === "Restaurant") { return 50; }
+        if (placeType === "Restaurant") { return 75; }
         if (placeType === "Hotel") { return 200; }
-        if (placeType === "Museum") { return 100; }
-        if (placeType === "Monument") { return 20; }
+        if (placeType === "Museum") { return 50; }
+        if (placeType === "Monument") { return 15; }
         if (placeType === "Entertaiment") { return 100; }
     }
-    if (priceType === "Luxury") {
-        if (placeType === "Restaurant") { return 1000; }
-        if (placeType === "Hotel") { return 10000; }
-        if (placeType === "Museum") { return 500; }
-        if (placeType === "Monument") { return 25; }
-        if (placeType === "Entertaiment") { return 1000; }
+    if (priceType === "Expensive") {
+        if (placeType === "Restaurant") { return 200; }
+        if (placeType === "Hotel") { return 1000; }
+        if (placeType === "Museum") { return 200; }
+        if (placeType === "Monument") { return 50; }
+        if (placeType === "Entertaiment") { return 300; }
     }
+    
 }

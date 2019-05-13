@@ -35,12 +35,13 @@ namespace Traveler.Controllers
         [HttpPost("getSaved")]
         public IEnumerable<PlaceDTO> getSavedPlace([FromBody]int travelId)
         {
-            var places = _context.SavedPlaces.Where(x => x.TravelId == travelId).Select(x => x.PlaceId).ToList();
+            var placesId = _context.SavedPlaces.Where(x => x.TravelId == travelId).Select(x => x.PlaceId).ToList();
+            var places = _context.Places.Where(x => placesId.Contains(x.Id));
+
             List<PlaceDTO> result = new List<PlaceDTO>();
 
-            foreach(var placeId in places)
+            foreach(var place in places)
             {
-                var place = _context.Places.Where(x => x.Id == placeId).First();
                 var res = new PlaceDTO()
                 {
                     Name = place.Name,
