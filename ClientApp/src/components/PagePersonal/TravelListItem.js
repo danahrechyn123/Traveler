@@ -79,12 +79,14 @@ class TravelListItem extends React.Component {
                 </ListGroupItem>
 
               
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className="travel-model">
-                    <ModalHeader toggle={this.toggle} className="travel-model-header">{this.props.city} ({this.props.country})</ModalHeader>
+                <Modal isOpen={this.state.modal} className="travel-model">
+                    <ModalHeader className="travel-model-header" onClick={this.toggleClose} > Close {this.props.city} ({this.props.country})</ModalHeader>
 
                     <ModalBody className="travel-model-body">
-                        <Nav tabs className="tab-nav">
-                            <NavItem className="tab-nav-item">
+                        <div className="places-content">
+                        
+                        <Nav tabs >
+                            <NavItem >
                                 <NavLink
                                     className={classnames({ active: this.state.activeTab === 'All' })}
                                     onClick={this.toggleOpen}
@@ -92,7 +94,7 @@ class TravelListItem extends React.Component {
                                     All
                                      </NavLink>
                             </NavItem>
-                            <NavItem className="tab-nav-item">
+                            <NavItem >
                                 <NavLink
                                     className={classnames({ active: this.state.activeTab === 'Saved' })}
                                     onClick={this.toggleTabSaved}
@@ -101,7 +103,7 @@ class TravelListItem extends React.Component {
                                      </NavLink>
                             </NavItem>
                         </Nav>
-                        <TabContent activeTab={this.state.activeTab} className="place-tab-div">
+                        <TabContent activeTab={this.state.activeTab} >
                             <TabPane tabId={this.state.activeTab}>
                                 <CardDeck>
                                     {this.state.placeList && this.state.placeList.map((place) => (
@@ -119,9 +121,17 @@ class TravelListItem extends React.Component {
                                 </CardDeck>
                             </TabPane>
                         </TabContent>
-                       
+                        </div>
+                        <div className="price-content">
+                            <div className="price-content-header">
+                                Price
+                            </div>
+                            <div className="price-content-body"> 
+
+                            </div> 
+                            <div className="price-content-btn"> Update</div>
+                        </div>
                     </ModalBody>
-                    <ModalFooter onClick={this.toggleClose} className="travel-model-footer">Cancel </ModalFooter>
                 </Modal>
             </div>
         );
