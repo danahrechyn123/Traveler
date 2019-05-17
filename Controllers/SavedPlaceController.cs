@@ -51,7 +51,10 @@ namespace Traveler.Controllers
                     Price = place.Price,
                     ImgUrl = place.ImgUrl,
                     CityName = _context.Cities.Where(x => x.Id == place.CityId).Select(x => x.Name).First(),
-                    Date = place.Date
+                    Date = place.Date,
+                    Username = _context.Users.Where(x => x.Id == place.UserId).Select(x => x.Username).First(),
+                    Id = place.Id,
+                    Status = place.Status
                 };
                 result.Add(res);
             }
@@ -62,8 +65,8 @@ namespace Traveler.Controllers
         [HttpDelete]
         public void Delete([FromBody]SavedPlaceDTO pl)
         {
-            var place = _context.SavedPlaces.Where(p => p.TravelId == pl.TravelId)
-                .Where(p => p.PlaceId == p.PlaceId).First();
+            var place = _context.SavedPlaces.Where(p => (p.TravelId == pl.TravelId))
+                .Where(x => x.PlaceId == pl.PlaceId).Single();
             _context.SavedPlaces.Remove(place);
             _context.SaveChanges();
         }

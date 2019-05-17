@@ -14,6 +14,8 @@ namespace Traveler.Dtos
         public PriceType PriceType { get; set; }
         public int UserId { get; set; }
         public int PeopleAmount { get; set; }
+        public  DateTime DateFrom { get; set; }
+        public DateTime DateTill { get; set; }
 
     }
 }

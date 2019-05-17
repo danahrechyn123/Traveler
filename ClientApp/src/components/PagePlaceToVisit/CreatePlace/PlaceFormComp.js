@@ -261,7 +261,7 @@ class PlaceFormComp extends React.Component {
                         <div className="slidecontainer">
                             <Input placeholder="Approximate Price"
                                 value={this.state.data.price}
-                                disabled
+                             
                             />
                             <input
                                 type="range"
@@ -287,7 +287,6 @@ class PlaceFormComp extends React.Component {
 export default PlaceFormComp;
 
 
-let travelTypeList = ["Relaxing", "Sport", "Educational", "Bussiness"];
 let priceTypeList = ["Minimum", "Medium", "Expensive"];
 let placeTypeList = ["Restaurant", "Hotel", "Museum", "Monument", "Entertaiment"];
 
@@ -301,14 +300,14 @@ function GetMinPrice(priceType, placeType) {
     }
     if (priceType === "Medium") {
         if (placeType === "Restaurant") { return 10; }
-        if (placeType === "Hotel") { return 30; }
+        if (placeType === "Hotel") { return 50; }
         if (placeType === "Museum") { return 15; }
         if (placeType === "Monument") { return 15; }
         if (placeType === "Entertaiment") { return 15; }
     }
     if (priceType === "Expensive") {
         if (placeType === "Restaurant") { return 75; }
-        if (placeType === "Hotel") { return 200; }
+        if (placeType === "Hotel") { return 150; }
         if (placeType === "Museum") { return 50; }
         if (placeType === "Monument") { return 15; }
         if (placeType === "Entertaiment") { return 100; }
@@ -319,21 +318,21 @@ function GetMinPrice(priceType, placeType) {
 function GetMaxPrice(priceType, placeType) {
     if (priceType === "Minimum") {
         if (placeType === "Restaurant") { return 10; }
-        if (placeType === "Hotel") { return 30; }
+        if (placeType === "Hotel") { return 50; }
         if (placeType === "Museum") { return 15; }
         if (placeType === "Monument") { return 10; }
         if (placeType === "Entertaiment") { return 15; }
     }
     if (priceType === "Medium") {
         if (placeType === "Restaurant") { return 75; }
-        if (placeType === "Hotel") { return 200; }
+        if (placeType === "Hotel") { return 150; }
         if (placeType === "Museum") { return 50; }
         if (placeType === "Monument") { return 15; }
         if (placeType === "Entertaiment") { return 100; }
     }
     if (priceType === "Expensive") {
         if (placeType === "Restaurant") { return 200; }
-        if (placeType === "Hotel") { return 1000; }
+        if (placeType === "Hotel") { return 300; }
         if (placeType === "Museum") { return 200; }
         if (placeType === "Monument") { return 50; }
         if (placeType === "Entertaiment") { return 300; }

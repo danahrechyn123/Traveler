@@ -6,7 +6,8 @@ export const travelService = {
     addTravel,
     getPlacesStrData,
     getPlacesIdData,
-    getTravelForUser
+    getTravelForUser,
+    calculateTotalPrice
 };
 
 function addTravel(travel) {
@@ -16,7 +17,9 @@ function addTravel(travel) {
         UserId: travel.userId,
         CityName: travel.city,
         PriceType: priceType,
-        PeopleAmount: travel.peopleAmount
+        PeopleAmount: travel.peopleAmount,
+        DateFrom: travel.dateFrom,
+        DateTill:travel.dateTill
     };
 
     const requestOptions = {
@@ -67,7 +70,6 @@ function getPlacesIdData(travelId, userId) {
     return fetch('/api/PlaceToVisits/getPlacesIdData', requestOptions)
         .then(handleResponse, handleError)
         .then(res => {
-            console.log(res);
             return res;
         })
         .catch();
@@ -86,6 +88,21 @@ function getTravelForUser(userId) {
             return res;
         })
         .catch();    
+}
+
+function calculateTotalPrice(travelId) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: travelId
+    };
+    return fetch('/api/Travel/Calculate', requestOptions)
+        .then(handleResponse, handleError)
+        .then(res => {
+            return res;
+        })
+        .catch();
+
 }
 
 export function parsePlaceType(typeName) {

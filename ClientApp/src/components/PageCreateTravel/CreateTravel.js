@@ -20,7 +20,8 @@ class CreateTravel extends React.Component {
                 country: '',
                 city: '',
                 priceType: '',
-                peopleAmount: '',
+                dateFrom: '',
+                dateTill:'',
                 userId: JSON.parse(localStorage.getItem('user')).id
             },
             countryList: '',
@@ -91,6 +92,8 @@ class CreateTravel extends React.Component {
                 placeType: '',
                 priceType: '',
                 peopleAmount: '',
+                dateFrom: '',
+                dateTill: '',
                 userId: JSON.parse(localStorage.getItem('user')).id
             },
             placeList: ''
@@ -258,24 +261,12 @@ class CreateTravel extends React.Component {
                                 <Input value={this.state.travel.priceType} disabled className="dp-input" />
                             </InputGroup>
 
-                            <InputGroup>
-                                <InputGroupAddon addonType="prepend">
-                                    <Dropdown isOpen={this.state.dropdownPeopleAmount} toggle={this.togglePeopleAmount}>
-                                        <DropdownToggle caret className="dropdown-toogle">
-                                            People Amount
-                                    </DropdownToggle>
-                                        <DropdownMenu>
-                                            <DropdownItem name="peopleAmount" value={0} onClick={this.handleChange}>Alone</DropdownItem>
-                                            <DropdownItem name="peopleAmount" value={1} onClick={this.handleChange}> +1 person </DropdownItem>
-                                            <DropdownItem name="peopleAmount" value={2} onClick={this.handleChange}> +2 people </DropdownItem>
-                                            <DropdownItem name="peopleAmount" value={3} onClick={this.handleChange}> +3 people </DropdownItem>
-                                            <DropdownItem name="peopleAmount" value={4} onClick={this.handleChange}> +4 people </DropdownItem>
-                                            <DropdownItem name="peopleAmount" value={5} onClick={this.handleChange}> +5 people </DropdownItem>
-                                        </DropdownMenu>
-                                    </Dropdown>
-                                </InputGroupAddon>
-                                <Input value={this.state.travel.peopleAmount} disabled className="dp-input" />
-                            </InputGroup>
+                            <input type="date" name="dateFrom" required
+                                onChange={this.handleChange} />
+
+                            <input type="date" name="dateTill" required
+                                onChange={this.handleChange} />
+
 
                         </CardBody>
                         <CardFooter onClick={this.handleViewTravel} className="front-footer"> Submit </CardFooter>

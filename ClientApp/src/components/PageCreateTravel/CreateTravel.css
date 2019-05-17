@@ -65,15 +65,18 @@
     src: url(../../fonts/Raleway/Raleway-Light.ttf);
 }
 
+.card-deck .card {
+  margin-bottom: 20px;
+}
 .place-card {
     width: 252px;
     color: black;
     border: solid 1px white;
     border-radius: 30px;
-    background-color: rgb(255, 255, 255, 0.7);
+    background-color: rgb(255, 255, 255, 0.9);
     padding: 0;
     height: 500px;
-    margin-top:20px;
+    text-align: start;
 }
 
 .place-card-back {
@@ -82,7 +85,7 @@
     color: white;
     border: solid 1px white;
     border-radius: 30px;
-    background-color: rgb(0, 0, 0, 0.5);
+    background-color: rgb(0, 0, 0, 0.7);
     padding: 0;
 }
 

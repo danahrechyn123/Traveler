@@ -82,8 +82,11 @@ class PlaceCard extends React.Component {
                                         width="250px" />
                                     <br />
                                     <div className="place-card-info">
-                                        Name: {this.props.name}
-                                        About: {this.props.about}
+                                        <p> City: {this.props.cityName} </p>
+                                        <p> Name: {this.props.name} </p>
+                                        <p> Price: {this.props.price} ( {parsePriceType(this.props.priceType)} ) </p>
+                                        <p> About: {this.props.about}</p>
+                                        <p className="card-info-date"> Added by {this.props.username} in {this.props.date} </p>
                                     </div>
                                 </CardBody>
                                 <CardFooter onClick={this.DeletePlace}>
@@ -118,9 +121,12 @@ class PlaceCard extends React.Component {
                                         width="250px" />
                                     <br />
                                     <div className="place-card-info">
-                                        Name: {this.props.name}
-                                        About: {this.props.about}
-                                    </div>
+                                    <p> City: {this.props.cityName} </p>
+                                    <p> Name: {this.props.name} </p>
+                                    <p> Price: {this.props.price} ( {parsePriceType(this.props.priceType)} ) </p>
+                                    <p> About: {this.props.about}</p>
+                                    <p className="card-info-date"> Added by {this.props.username} in {this.props.date} </p>
+                                </div>
                                 </CardBody>
                                 <CardFooter onClick={this.DeletePlace}>
                                     <p>Delete</p>
@@ -158,9 +164,12 @@ class PlaceCard extends React.Component {
                                             width="250px" />
                                         <br />
                                         <div className="place-card-info">
-                                            Name: {this.props.name}
-                                            About: {this.props.about}
-                                        </div>
+                                        <p> City: {this.props.cityName} </p>
+                                        <p> Name: {this.props.name} </p>
+                                        <p> Price: {this.props.price} ( {parsePriceType(this.props.priceType)} ) </p>
+                                        <p> About: {this.props.about}</p>
+                                        <p className="card-info-date"> Added by {this.props.username} in {this.props.date} </p>
+                                    </div>
                                     </CardBody>
                                     <CardFooter onClick={this.DeletePlaceFromTravel}>
                                         <p>Delete</p>
@@ -194,9 +203,12 @@ class PlaceCard extends React.Component {
                                             width="250px" />
                                         <br />
                                         <div className="place-card-info">
-                                            Name: {this.props.name}
-                                            About: {this.props.about}
-                                        </div>
+                                        <p> City: {this.props.cityName} </p>
+                                        <p> Name: {this.props.name} </p>
+                                        <p> Price: {this.props.price} ( {parsePriceType(this.props.priceType)} ) </p>
+                                        <p> About: {this.props.about}</p>
+                                        <p className="card-info-date"> Added by {this.props.username} in {this.props.date} </p>
+                                    </div>
                                     </CardBody>
                                     <CardFooter onClick={this.SavePlace}>
                                         <p>Save</p>
@@ -231,9 +243,12 @@ class PlaceCard extends React.Component {
                                         width="250px" />
                                     <br />
                                     <div className="place-card-info">
-                                        Name: {this.props.name}
-                                        About: {this.props.about}
-                                    </div>
+                                    <p> City: {this.props.cityName} </p>
+                                    <p> Name: {this.props.name} </p>
+                                    <p> Price: {this.props.price} ( {parsePriceType(this.props.priceType)} ) </p>
+                                    <p> About: {this.props.about}</p>
+                                    <p className="card-info-date"> Added by {this.props.username} in {this.props.date} </p>
+                                </div>
                                 </CardBody>
                                 <CardFooter onClick={this.GoBack}>
                                     <p value={this.props.id} >Hide</p>
@@ -270,5 +285,11 @@ function parsePlaceType(id) {
     else if (id === 2) { return "Museum"; }
     else if (id === 3) { return "Monument"; }
     else if (id === 4) { return "Entertaiment"; }
+    else { return "error" }
+}
+function parsePriceType(id) {
+    if (id === 0) { return "Econom"; }
+    else if (id === 1) { return "Medium"; }
+    else if (id === 2) { return "Expensive"; }
     else { return "error" }
 }

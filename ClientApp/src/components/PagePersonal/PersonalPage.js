@@ -50,27 +50,7 @@ class PersonalPage extends React.Component {
                         <p>{currentUser.username}</p>
                     </CardHeader>
                     <CardBody className="personal-card-body">
-                        <Nav tabs>
-                            <NavItem>
-                                <NavLink
-                                    className={classnames({ active: this.state.activeTab === '1' })}
-                                    onClick={() => { this.toggle('1'); }}
-                                >
-                                    Your Travels
-                            </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink
-                                    className={classnames({ active: this.state.activeTab === '2' })}
-                                    onClick={() => { this.toggle('2'); }}
-                                >
-                                    You follow this travels
-                             </NavLink>
-                            </NavItem>
-                        </Nav>
-
-                        <TabContent activeTab={this.state.activeTab}>
-                            <TabPane tabId="1">
+                       
                                 <ListGroup>
                                     {this.state.travelList && this.state.travelList.map((tr) => (
                                         <TravelListItem
@@ -87,13 +67,7 @@ class PersonalPage extends React.Component {
                                     ))}
 
                                 </ListGroup>
-                            </TabPane>
-                            <TabPane tabId="2">
-                                <ListGroup>
-                                    
-                                </ListGroup>
-                            </TabPane>
-                        </TabContent>
+                           
 
                     </CardBody>
                     <CardFooter> Edit Personal Data</CardFooter>

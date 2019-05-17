@@ -65,7 +65,7 @@ namespace Traveler.Controllers
 
 
         [HttpPost("getPlaces")]
-        public IEnumerable<PlaceToVisit> GetPlacesForTravel([FromBody]TravelDTO travel)
+        public IEnumerable<PlaceDTO> GetPlacesForTravel([FromBody]TravelDTO travel)
         {
             var CityId = _context.Cities.Where(c => c.Name == travel.CityName).Select(c => c.Id).First();
             var places = new List<PlaceToVisit>();
@@ -90,13 +90,37 @@ namespace Traveler.Controllers
                     .ToList();
 
             }
+
+            var result = new List<PlaceDTO>();
+
+            foreach (var item in places)
+            {
+                var pl = new PlaceDTO()
+                {
+                    CityName = _context.Cities.Where(x => x.Id == item.CityId).Select(x => x.Name).First(),
+                    Username = _context.Users.Where(x => x.Id == item.UserId).Select(x => x.Username).First(),
+                    ImgUrl = item.ImgUrl,
+                    PlaceType = item.PlaceType,
+                    PriceType = item.PriceType,
+                    Name = item.Name,
+                    About = item.About,
+                    Date = item.Date,
+                    Id = item.Id,
+                    Price = item.Price,
+                    Status = item.Status
+                    
+                };
+                result.Add(pl);
+
+            }
+
+            return result;
             
-            return places;
         }
 
 
         [HttpPost("getPlacesIdData")]
-        public IEnumerable<PlaceToVisit> GetPlacesForTravelIdData([FromBody]TravelDTO tr)
+        public IEnumerable<PlaceDTO> GetPlacesForTravelIdData([FromBody]TravelDTO tr)
         {
             var travel = _context.Travels.Where(t => t.Id == tr.Id).First();
             var alreadySavedId = _context.SavedPlaces.Where(x => x.TravelId == tr.Id).Select(x => x.PlaceId).ToList();
@@ -122,25 +146,89 @@ namespace Traveler.Controllers
                 places = _context.Places.Where(p => p.CityId == travel.CityId).Where(p => p.Status == 1).ToList();
 
             }
+            var result = new List<PlaceDTO>();
 
-            return places.Except(alreadySaved);
+            foreach (var item in places.Except(alreadySaved))
+            {
+                var pl = new PlaceDTO()
+                {
+                    CityName = _context.Cities.Where(x => x.Id == item.CityId).Select(x => x.Name).First(),
+                    Username = _context.Users.Where(x => x.Id == item.UserId).Select(x => x.Username).First(),
+                    ImgUrl = item.ImgUrl,
+                    PlaceType = item.PlaceType,
+                    PriceType = item.PriceType,
+                    Name = item.Name,
+                    About = item.About,
+                    Date = item.Date,
+                    Id = item.Id,
+                    Price = item.Price,
+                    Status = item.Status
+                };
+                result.Add(pl);
+
+            }
+
+            return result;
         }
 
 
         [HttpPost("getPlacesByType")]
-        public IEnumerable<PlaceToVisit> GetPlacesByType([FromBody]PlaceType placeType)
+        public IEnumerable<PlaceDTO> GetPlacesByType([FromBody]PlaceType placeType)
         {
             var places = _context.Places.Where(pl => pl.PlaceType == placeType)
                 .Where(pl => pl.Status == 1).ToArray();
-            return places;
+
+            var result = new List<PlaceDTO>();
+
+            foreach (var item in places)
+            {
+                var pl = new PlaceDTO()
+                {
+                    CityName = _context.Cities.Where(x => x.Id == item.CityId).Select(x => x.Name).First(),
+                    Username = _context.Users.Where(x => x.Id == item.UserId).Select(x => x.Username).First(),
+                    ImgUrl = item.ImgUrl,
+                    PlaceType = item.PlaceType,
+                    PriceType = item.PriceType,
+                    Name = item.Name,
+                    About = item.About,
+                    Date = item.Date,
+                    Id = item.Id,
+                    Price = item.Price,
+                    Status = item.Status
+                };
+                result.Add(pl);
+
+            }
+            return result;
         }
 
 
         [HttpPost("getNewPlaces")]
-        public IEnumerable<PlaceToVisit> GetNewPlaces()
+        public IEnumerable<PlaceDTO> GetNewPlaces()
         {
             var places = _context.Places.Where(pl => pl.Status == 0).ToArray();
-            return places;
+            var result = new List<PlaceDTO>();
+
+            foreach (var item in places)
+            {
+                var pl = new PlaceDTO()
+                {
+                    CityName = _context.Cities.Where(x => x.Id == item.CityId).Select(x => x.Name).First(),
+                    Username = _context.Users.Where(x => x.Id == item.UserId).Select(x => x.Username).First(),
+                    ImgUrl = item.ImgUrl,
+                    PlaceType = item.PlaceType,
+                    PriceType = item.PriceType,
+                    Name = item.Name,
+                    About = item.About,
+                    Date = item.Date,
+                    Id = item.Id,
+                    Price = item.Price,
+                    Status = item.Status
+                };
+                result.Add(pl);
+
+            }
+            return result;
         }
 
 

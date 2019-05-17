@@ -122,9 +122,13 @@ class Places extends React.Component {
                                             <PlaceCard
                                                 id={place.id}
                                                 name={place.name}
+                                                cityName={place.cityName}
                                                 placeType={place.placeType}
+                                                priceType={place.priceType}
                                                 imgUrl={place.imgUrl}
                                                 about={place.about}
+                                                username={place.username}
+                                                price={place.price}
                                                 status={place.status} />
                                         ))}
                                     </CardDeck>
