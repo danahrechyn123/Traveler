@@ -39,6 +39,14 @@ class PersonalPage extends React.Component {
         }
     }
 
+    toggleOpenForm = () => {
+        document.getElementById("mySidenav").style.width = "100%";
+    }
+
+    toggleCloseForm = () => {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
     render() {
 
         const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -50,28 +58,40 @@ class PersonalPage extends React.Component {
                         <p>{currentUser.username}</p>
                     </CardHeader>
                     <CardBody className="personal-card-body">
-                       
-                                <ListGroup>
-                                    {this.state.travelList && this.state.travelList.map((tr) => (
-                                        <TravelListItem
-                                            id={tr.id}
-                                            city={tr.cityName}
-                                            cityId={tr.cityId}
-                                            country={tr.countryName}
-                                            owner={tr.ownerName}
-                                            date={tr.date}
-                                            priceType={tr.priceType}
-                                            registedAmount={tr.registedAmount}
-                                            userId={currentUser.id}
-                                        />
-                                    ))}
+                        <div className="btn-container">
+                            <a className="button-p circle" onClick={this.toggleOpenForm}> + </a>
+                        </div>
 
-                                </ListGroup>
-                           
 
+                        <ListGroup>
+                            {this.state.travelList && this.state.travelList.map((tr) => (
+                                <TravelListItem
+                                    id={tr.id}
+                                    city={tr.cityName}
+                                    cityId={tr.cityId}
+                                    country={tr.countryName}
+                                    owner={tr.ownerName}
+                                    date={tr.date}
+                                    priceType={tr.priceType}
+                                    registedAmount={tr.registedAmount}
+                                    userId={currentUser.id}
+                                />
+                            ))}
+
+                        </ListGroup>
                     </CardBody>
-                    <CardFooter> Edit Personal Data</CardFooter>
+                    <CardFooter></CardFooter>
                 </Card>
+
+                <div id="mySidenav" className="sidenav">
+                    <a href="javascript:void(0)" className="closebtn" onClick={this.toggleCloseForm}>&times;</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="#">Clients</a>
+                    <a href="#">Contact</a>
+                </div>
+
+
             </div>
         );
     }
