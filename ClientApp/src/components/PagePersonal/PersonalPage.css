@@ -45,7 +45,10 @@ h3 {
 .list-group-item:hover {
     background-color: rgb(255, 255, 255, 1);
 }
-
+.travel-item-header {
+    font-family: Raleway-Light;
+    text-align: center;
+}
 /* travel-model */
 .travel-model {
     position: absolute;
@@ -58,7 +61,6 @@ h3 {
     background-repeat: no-repeat;
     background-size: cover;
     padding-left: 10px;
-    
 }
 .personal-tab-content {
     margin-top: 20px;
@@ -219,16 +221,21 @@ h3 {
     /* Form */
 .sidenav {
     height: 100%;
+    
     width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-image: url('../../images/PersonalBg3Blur.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 120px;
-    text-align:center;
+    text-align: center;
 }
 
 .sidenav a {
@@ -256,4 +263,11 @@ h3 {
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+.form-div {
+    height: 70vh;
+    width: 70vw;
+    margin-left: 15vw;
+    border: solid 1px white;
+
 }

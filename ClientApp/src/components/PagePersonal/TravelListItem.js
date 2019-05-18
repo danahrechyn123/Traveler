@@ -81,12 +81,12 @@ class TravelListItem extends React.Component {
         return (
             <div>
                 <ListGroupItem onClick={this.toggleOpen}>
-                    <ListGroupItemHeading>{this.props.city} ({this.props.country})</ListGroupItemHeading>
+                    <ListGroupItemHeading className = "travel-item-header">{this.props.country} - {this.props.city} </ListGroupItemHeading>
                     <ListGroupItemText>
-                        Price Type : {this.props.priceType} <br />
-                        Owner: {this.props.owner}<br />
-                        Date: {this.props.date}<br />
-                        Registered People: <Badge>{this.props.registedAmount}</Badge><br />
+                        Type : {this.props.priceType} <br /> 
+                        Date From : {this.props.dateFrom} <br />
+                        Date Till : {this.props.dateTill} <br />
+
                     </ListGroupItemText>
                 </ListGroupItem>
 

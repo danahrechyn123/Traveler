@@ -12,8 +12,7 @@ class NavMenu extends React.Component {
                         <h2 className=" mr-md-auto"><Link to={'/'} exact className="btn btn-outline-primary">Home</Link></h2>
 
                         <h2><Link className="btn btn-outline-primary" to={'/mustvisit'}>Recommended</Link></h2>
-                        <h2><Link className="btn btn-outline-primary" to={'/createtravel'}>Create</Link></h2>
-                        <h2><Link className="btn btn-outline-primary" to={'/personalpage'}>{currentUser.firstName} {currentUser.lastName}</Link></h2>
+                       <h2><Link className="btn btn-outline-primary" to={'/personalpage'}>{currentUser.firstName} {currentUser.lastName}</Link></h2>
 
                         <h2><Link className="btn btn-outline-primary" to={'/login'} exact>Logout</Link></h2>
                     </div>

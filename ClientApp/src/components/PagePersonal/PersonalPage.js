@@ -2,11 +2,12 @@
 import './PersonalPage.css';
 import {
     Card, CardHeader, CardFooter, CardBody, ListGroup,
-    TabContent, TabPane, Nav, NavItem, NavLink
+    Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
+    InputGroup, InputGroupAddon, Input
 } from 'reactstrap';
-import classnames from 'classnames';
 import TravelListItem from './TravelListItem';
 import { travelService } from '../../services/TravelService';
+import { dataService } from '../../services/DataService';
 
 
 class PersonalPage extends React.Component {
@@ -16,10 +17,29 @@ class PersonalPage extends React.Component {
         this.state = {
             userId: JSON.parse(localStorage.getItem('user')).id,
             travelList: '',
-            activeTab: '1'
+            activeTab: '1',
+            travel: {
+                country: '',
+                city: '',
+                priceType: '',
+                dateFrom: '',
+                dateTill: '',
+                userId: JSON.parse(localStorage.getItem('user')).id
+            },
+            countryList: '',
+            cityList: '',
+            placeList: '',
+            isFlipped: false,
+            dropdownOpen: false,
+            dropdownCityOpen: false,
+            dropdownPriceTypeOpen: false
         };
 
-
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChoose = this.handleChoose.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSaveTravel = this.handleSaveTravel.bind(this);
+        this.handleChooseCountry = this.handleChooseCountry.bind(this);
         this.toggle = this.toggle.bind(this);
     }
 
@@ -28,14 +48,37 @@ class PersonalPage extends React.Component {
             this.setState({
                 travelList: res
             });
-        }).catch(err => console.log(err));       
+        }).catch(err => console.log(err));
+
+        dataService.getCountries().then(res => {
+            this.setState({
+                countryList: res
+            });
+        }).catch(err => console.log(err));
+
+        dataService.getCities("Ukraine").then(res => {
+            this.setState({
+                cityList: res
+            });
+        }).catch(err => console.log(err));
     }
 
-    toggle(tab) {
-        if (this.state.activeTab !== tab) {
-            this.setState({
-                activeTab: tab
-            });
+  
+
+    toggle = () => {
+        this.setState(prevState => ({
+            dropdownOpen: !prevState.dropdownOpen
+        }));
+    }
+
+    toggleCity = () => {
+        if (this.state.travel.country !== '') {
+            this.setState(prevState => ({
+                dropdownCityOpen: !prevState.dropdownCityOpen
+            }));
+        }
+        else {
+            alert("Choose country before.");
         }
     }
 
@@ -44,7 +87,90 @@ class PersonalPage extends React.Component {
     }
 
     toggleCloseForm = () => {
+        travelService.getTravelForUser(this.state.userId).then(res => {
+            this.setState({
+                travelList: res
+            });
+        }).catch(err => console.log(err));
         document.getElementById("mySidenav").style.width = "0";
+    }
+
+    togglePriceType = () => {
+        this.setState(prevState => ({
+            dropdownPriceTypeOpen: !prevState.dropdownPriceTypeOpen
+        }));
+    }
+
+    handleChange(event) {
+        const { name, value } = event.target;
+        const { travel } = this.state;
+        this.setState({
+            travel: {
+                ...travel,
+                [name]: value
+            }
+        });
+    }
+
+    handleChooseCountry(event) {
+        const { value } = event.target;
+        const { travel } = this.state;
+        this.setState({
+            travel: {
+                ...travel,
+                country: value,
+                city: ''
+            }
+        });
+    }
+
+    handleClick(e) {
+        e.preventDefault();
+        this.setState({
+            travel: {
+                country: '',
+                city: '',
+                travelType: '',
+                placeType: '',
+                priceType: '',
+                peopleAmount: '',
+                dateFrom: '',
+                dateTill: '',
+                userId: JSON.parse(localStorage.getItem('user')).id
+            },
+            placeList: ''
+
+        });
+        this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+    }
+
+    handleChoose() {
+        if (this.state.travel.country !== '') {
+            var cities = dataService.getCities(this.state.travel.country).then(res => {
+                this.setState({
+                    cityList: res
+                });
+            }).catch(err => console.log(err));
+        }
+    }
+
+    handleSaveTravel(event) {
+
+        this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+        travelService.addTravel(this.state.travel);
+        this.setState({
+            travel: {
+                country: '',
+                city: '',
+                priceType: '',
+                peopleAmount: '',
+                dateFrom: '',
+                dateTill: '',
+                userId: JSON.parse(localStorage.getItem('user')).id
+            },
+            placeList: ''
+        });
+        
     }
 
     render() {
@@ -70,11 +196,10 @@ class PersonalPage extends React.Component {
                                     city={tr.cityName}
                                     cityId={tr.cityId}
                                     country={tr.countryName}
-                                    owner={tr.ownerName}
-                                    date={tr.date}
-                                    priceType={tr.priceType}
-                                    registedAmount={tr.registedAmount}
-                                    userId={currentUser.id}
+                                    dateFrom={tr.dateFrom}
+                                    dateTill={tr.dateTill}
+                                    priceType={parsePriceType(tr.priceType)}
+                                    daysAmount={tr.daysAmount}
                                 />
                             ))}
 
@@ -85,10 +210,84 @@ class PersonalPage extends React.Component {
 
                 <div id="mySidenav" className="sidenav">
                     <a href="javascript:void(0)" className="closebtn" onClick={this.toggleCloseForm}>&times;</a>
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
-                    <a href="#">Contact</a>
+                    <div className="form-div">
+                        <InputGroup>
+                            <InputGroupAddon addonType="prepend">
+                                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                                    <DropdownToggle caret className="dropdown-toogle">
+                                        Country
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        {this.state.countryList && this.state.countryList.map((c) => (
+                                            <DropdownItem key={c.id}
+                                                name="country"
+                                                value={c.name}
+                                                onClick={this.handleChooseCountry}
+                                            >
+                                                {c.name}
+                                            </DropdownItem>
+                                        ))}
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </InputGroupAddon>
+                            <Input value={this.state.travel.country} disabled className="dp-input" />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputGroupAddon addonType="prepend">
+                                <Dropdown isOpen={this.state.dropdownCityOpen} toggle={this.toggleCity} onClick={this.handleChoose} >
+                                    <DropdownToggle caret className="dropdown-toogle">
+                                        City
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        {this.state.cityList && this.state.cityList.map((c) => (
+                                            <DropdownItem key={c}
+                                                name="city"
+                                                value={c}
+                                                onClick={this.handleChange}
+                                            >
+                                                {c}
+                                            </DropdownItem>
+                                        ))}
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </InputGroupAddon>
+                            <Input value={this.state.travel.city} disabled className="dp-input" />
+                        </InputGroup>
+
+                        <InputGroup>
+                            <InputGroupAddon addonType="prepend">
+                                <Dropdown isOpen={this.state.dropdownPriceTypeOpen} toggle={this.togglePriceType}>
+                                    <DropdownToggle caret className="dropdown-toogle">
+                                        Price Type
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        {priceTypeList && priceTypeList.map((c) => (
+                                            <DropdownItem key={c}
+                                                name="priceType"
+                                                value={c}
+                                                onClick={this.handleChange}
+                                            >
+                                                {c}
+                                            </DropdownItem>
+                                        ))}
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </InputGroupAddon>
+                            <Input value={this.state.travel.priceType} disabled className="dp-input" />
+                        </InputGroup>
+
+                        <input type="date" name="dateFrom" required value={this.state.travel.dateFrom}
+                            onChange={this.handleChange} />
+
+                        <input type="date" name="dateTill" required
+                            value={this.state.travel.dateTill}
+                            onChange={this.handleChange} />
+
+                        <button onClick={this.handleSaveTravel} >Submit</button>
+
+
+                    </div>
                 </div>
 
 
@@ -98,3 +297,11 @@ class PersonalPage extends React.Component {
 }
 
 export default PersonalPage;
+
+let priceTypeList = ["Minimum", "Medium", "Expensive"];
+function parsePriceType(id) {
+    if (id === 0) { return "Econom"; }
+    else if (id === 1) { return "Medium"; }
+    else if (id === 2) { return "Expensive"; }
+    else { return "error" }
+}

@@ -13,9 +13,10 @@ namespace Traveler.Dtos
         public string CityName { get; set; }
         public int CityId { get; set; }
         public string CountryName { get; set; }
-        public string Date { get; set; }
+        public string DateFrom { get; set; }
+        public string DateTill { get; set; }
         public  PriceType PriceType{ get; set; }        
-        public int RegistedAmount { get; set; }
+        public int DaysAmount { get; set; }
 
     }
 }

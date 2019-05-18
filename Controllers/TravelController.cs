@@ -86,7 +86,7 @@ namespace Traveler.Controllers
         [HttpPost("getusertravels")]
         public IEnumerable<TravelViewDTO> GetTravelsForUser([FromBody]int userId)
         {
-            var travels = dbcontext.Travels.Where(t => t.UserId == userId).ToArray();
+            var travels = dbcontext.Travels.Where(t => t.UserId == userId).ToArray().Reverse();
 
             List<TravelViewDTO> travelsView = new List<TravelViewDTO>();
             foreach(var tr in travels)
@@ -102,8 +102,9 @@ namespace Traveler.Controllers
                     CityId = tr.CityId,
                     CountryName = dbcontext.Countries.Where(c => c.Id == countryId).Select(c => c.Name).First(),
                     PriceType = tr.PriceType,
-                    Date = tr.DateFrom.ToLongDateString(),
-                    RegistedAmount = 0
+                    DateFrom = tr.DateFrom.ToString("dd/MM/yyyy"),
+                    DateTill = tr.DateTill.ToString("dd/MM/yyyy"),
+                    DaysAmount = (tr.DateTill - tr.DateFrom).Days
                 };
                 travelsView.Add(travelView);
             }
