@@ -1,7 +1,21 @@
 ﻿
 /*Scroll box*/
+@font-face {
+    font-family: Arizonia-Regular;
+    src: url(../../fonts/Arizona-Regular/Arizonia-Regular.ttf);
+}
 
-.ScrollBox{
-    width:100%;
-    text-align:center;
+.home-name {
+    height: 30vh;
+    font-size: 305px;
+    font-family: Arizonia-Regular;
+    color: white;
+    text-align: center;
+}
+.home-text {
+    color: white;
+    text-align: center;
+    padding-top: 180px;
+    font-size: 30px;
+    font-family: Raleway-Light;
 }

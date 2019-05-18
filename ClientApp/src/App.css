@@ -1,6 +1,21 @@
 ﻿/* main for Layout*/
 .Home {
-    background-color: springgreen;
+    height: 100vh;
+    background-image: url(../src/images/formBgBlur.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 10vh;
+}
+.Login-Page {
+    height: 100vh;
+    width: 100vw;
+    background-image: url(../src/images/formBgBlur.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     padding-top: 10vh;
 }
 /* main for Layout*/
@@ -21,7 +36,7 @@
     padding-top: 12vh;
 }
 .CreatePlace {
-    background-image: url(images/CreatePageBg.jpg);
+    background-image: url(../src/images/formBg.jpg);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;

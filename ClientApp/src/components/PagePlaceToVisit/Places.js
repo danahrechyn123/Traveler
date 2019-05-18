@@ -68,9 +68,12 @@ class Places extends React.Component {
             if (currentUser.role === 0) {
                 return (
                     <div className="Places container-fluid">
-                        <div className="AddPlaceBtn">
-                            <h2><Link className="btn btn-outline-primary" to={'/createplace'}>Suggest place to visit</Link></h2>
-                        </div>
+                        
+                        <Link to={'/createplace'}>
+                        <div className="btn-container">
+                            <a className="button-p circle">+</a>
+                            </div>
+                        </Link>
                         <div >
                             <Nav tabs className="tab-nav">
                                 <NavItem className="tab-nav-item">

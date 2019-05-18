@@ -10,12 +10,8 @@ class Home extends React.Component {
         const currentUser = JSON.parse(localStorage.getItem('user'));
         return (
             <div className="Home container-fluid">
-                <div className="">
-
-                    <h2>Scroll to read more ... </h2>
-                </div>
-
-                <div className="AboutBox1"> about box</div>
+                <div className="home-name">Traveller </div>
+                <p className="home-text" >Plan your travel with us! </p>
             </div>
         );
     }

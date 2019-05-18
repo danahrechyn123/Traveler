@@ -265,9 +265,25 @@ h3 {
     .sidenav a {font-size: 18px;}
 }
 .form-div {
-    height: 70vh;
+    height: 60vh;
     width: 70vw;
     margin-left: 15vw;
     border: solid 1px white;
-
+    color: white;
+}
+.table {
+    color: white;
+}
+.submit-btn {
+        background-color: rgb(255, 255, 255, 0.4);
+        border-radius: 2px;
+        color: black;
+        position: absolute;
+        bottom: 28px;
+        width: 70vw;
+        border: solid 1px white;
+        padding: 10px;
+    }
+.submit-btn:hover {
+    background-color: rgb(255, 255, 255);
 }

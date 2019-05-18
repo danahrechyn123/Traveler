@@ -3,7 +3,7 @@ import './PersonalPage.css';
 import {
     Card, CardHeader, CardFooter, CardBody, ListGroup,
     Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
-    InputGroup, InputGroupAddon, Input
+    InputGroup, InputGroupAddon, Input, Table
 } from 'reactstrap';
 import TravelListItem from './TravelListItem';
 import { travelService } from '../../services/TravelService';
@@ -210,7 +210,9 @@ class PersonalPage extends React.Component {
 
                 <div id="mySidenav" className="sidenav">
                     <a href="javascript:void(0)" className="closebtn" onClick={this.toggleCloseForm}>&times;</a>
+
                     <div className="form-div">
+                        <h2>Create your new travel!</h2>
                         <InputGroup>
                             <InputGroupAddon addonType="prepend">
                                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
@@ -275,16 +277,31 @@ class PersonalPage extends React.Component {
                                 </Dropdown>
                             </InputGroupAddon>
                             <Input value={this.state.travel.priceType} disabled className="dp-input" />
-                        </InputGroup>
+                        </InputGroup><br/>
 
-                        <input type="date" name="dateFrom" required value={this.state.travel.dateFrom}
-                            onChange={this.handleChange} />
+                        <Table>
+                            <tr>
+                                <th><h2>From: </h2></th>
+                                <th> <input type="date" name="dateFrom" required value={this.state.travel.dateFrom}
+                                    onChange={this.handleChange} />  
+                                </th>
+                            </tr>
+                            <tr>
+                                <th><h2>Till: </h2></th>
+                                <th> <input type="date" name="dateTill" required
+                                    min={this.state.travel.dateFrom}
+                                    value={this.state.travel.dateTill}
+                                    onChange={this.handleChange} />
 
-                        <input type="date" name="dateTill" required
-                            value={this.state.travel.dateTill}
-                            onChange={this.handleChange} />
+                                </th>
+                            </tr>
 
-                        <button onClick={this.handleSaveTravel} >Submit</button>
+                        </Table>
+                         
+
+                          
+
+                        <div onClick={this.handleSaveTravel} className="submit-btn" >Submit</div>
 
 
                     </div>

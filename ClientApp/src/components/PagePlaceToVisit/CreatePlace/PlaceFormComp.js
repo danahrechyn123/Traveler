@@ -99,7 +99,7 @@ class PlaceFormComp extends React.Component {
                 priceType: '',
                 imgUrl: '',
                 name: '',
-                about: '',
+                about: '', price: '',
                 userId: JSON.parse(localStorage.getItem('user')).id
             }
         });

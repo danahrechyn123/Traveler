@@ -2,8 +2,16 @@
     margin: auto;
     margin-top: 50px;
     width: 20%;
+    color: white;
+}
+.login-btn {
+    background-color: rbd(255, 255, 0, 0.6);
+}
+.login-btn:hover {
+    color: white;
 }
 
 .unlogged-form .buttons {
     float: right;
 }
+
